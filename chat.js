@@ -50,7 +50,10 @@ function createRoom(){
             console.log('finished offer created');
             // console.log("offer2", offer.sdp)
             // console.log("local2", pc.localDescription)
-            $('#offer-box').text(offer.sdp);
+
+            console.log("offer origin: ", offer);
+            $('#offer-box').text(JSON.stringify(offer));
+            // $('#offer-box').text(offer.sdp);
             globalOffer = offer;
         }
     }
@@ -72,7 +75,13 @@ async function joinRoom(){
         }
     }
     
-    await pc.setRemoteDescription(globalOffer);
+    let text = $('#offer-box').text();
+    console.log("offer val", text);
+    let parsed = JSON.parse(text);
+    console.log("parsed: ", parsed);
+
+    await pc.setRemoteDescription(parsed);
+    // await pc.setRemoteDescription(globalOffer);
     console.log('remote description set', pc.remoteDescription);
 
     let answer = await pc.createAnswer();
@@ -124,6 +133,8 @@ function sendMessage(){
 //exit and close buttons
 //files/audio
 //sockets
+//OH and load script & css into single html file
+//for portability
 
 //list what didn't need!
 //all that SDP crap!
