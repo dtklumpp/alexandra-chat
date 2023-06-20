@@ -7,11 +7,10 @@ let pca;
 let pcb;
 let dcg;
 
-$('#cheat').on('click', cheatSetup);
+//for same-page debugging
+let dcx;
 
-function cheatSetup(){
-    console.log('cheat setup');
-}
+$('#cheat').on('click', cheatSetup);
 
 
 $('#create').on('click', createRoom);
@@ -79,6 +78,10 @@ function createRoom(){
 
 $('#join').on('click', joinRoom);
 
+
+
+
+
 async function joinRoom(){
     let pc = new RTCPeerConnection();
     pc.ondatachannel = function(event){
@@ -122,6 +125,8 @@ async function joinRoom(){
 
 $('#connect').on('click', makeConnection)
 
+
+
 async function makeConnection(){
     let paste2 = $('#paste2').val();
     let json2 = JSON.parse(paste2);
@@ -142,6 +147,7 @@ function sendMessage(){
     
     setTimeout(() => {
         dcg.send(message);
+        // dcx.send("xxx"+message);
     }, 100)
     
     // dcg.send(message);
@@ -151,10 +157,16 @@ function sendMessage(){
     $('#message').val(placeholder);
 }
 
+// function inMsg2(event){
+//     let data = event.data;
+//     $('#inbox').append("channel2"+data);
+// }
+
 function incomingMessage(event){
     let data = event.data;
     $('#inbox').append(data);
 }
+
 
 //ok now what
 //add cheat connection
@@ -274,3 +286,47 @@ function incomingMessage(event){
 // dc.onclose = () => {
 //     console.log("datachannel close");
 // };
+
+
+
+async function cheatSetup(){
+    console.log('cheat setup');
+    let pc = new RTCPeerConnection();
+    let dc = pc.createDataChannel('taco');
+    // dc.onmessage = incomingMessage;
+    let offer = await pc.createOffer();
+    let desc = pc.setLocalDescription(offer);
+    pca = pc;
+    dcg = dc;
+    pc.onicecandidate = async function(candidate){
+        if(candidate.candidate == null){
+            let offer = await pc.createOffer();
+            globalOffer = offer;
+            finishSetup();
+        }
+    }
+    async function finishSetup(){
+        // let offer = await pc.createOffer();
+        // globalOffer = offer;
+
+        let pc = new RTCPeerConnection();
+        pc.ondatachannel = function(event){
+            let channel = event.channel;
+            channel.onmessage = incomingMessage;
+            // channel.onmessage = inMsg2;
+            // dcg = channel;
+            // dcx = channel;
+        }
+
+        await pc.setRemoteDescription(globalOffer);
+        let answer = await pc.createAnswer();
+        await pc.setLocalDescription(answer);
+        
+        globalAnswer = answer;
+
+        pcb = pc;
+
+        await pca.setRemoteDescription(globalAnswer);
+
+    }
+}
