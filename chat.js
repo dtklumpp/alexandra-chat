@@ -16,6 +16,12 @@ function createRoom(){
     let dc = pc.createDataChannel('taco');
     // console.log(dc)
 
+    //new for cross-tab
+    dc.onmessage = function(event){
+        let data = event.data
+        $('#inbox').append(data);
+    }
+
 
     //must set local description initially
     //in order to start generating ICE candidates
@@ -73,6 +79,7 @@ async function joinRoom(){
             let data = event.data
             $('#inbox').append(data);
         }
+        dcg = channel;
     }
     
     // let text = $('#offer-box').text();
@@ -120,16 +127,18 @@ let msgCount = 0;
 $('#send').on('click', sendMessage);
 
 function sendMessage(){
-    let message = "_msg"+msgCount;
+    let message = $('#message').val();
     $('#outbox').append(message);
-
+    
     setTimeout(() => {
         dcg.send(message);
     }, 100)
-
+    
     // dcg.send(message);
-
+    
     msgCount++;
+    let placeholder = "_msg"+msgCount;
+    $('#message').val(placeholder);
 }
 
 //ok now what
