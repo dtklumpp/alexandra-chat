@@ -1,16 +1,16 @@
 //HOST STUFF -- later put in button fxn
 
-let globalOffer;
-let globalAnswer;
+// let globalOffer;
+// let globalAnswer;
 
 let pca;
-let pcb;
+// let pcb;
 let dcg;
 
 //for same-page debugging
-let dcx;
-
 $('#cheat').on('click', cheatSetup);
+// let dcx;
+
 
 
 $('#create').on('click', createRoom);
@@ -67,7 +67,7 @@ function createRoom(){
             console.log("offer origin: ", offer);
             $('#offer-box').text(JSON.stringify(offer));
             // $('#offer-box').text(offer.sdp);
-            globalOffer = offer;
+            // globalOffer = offer;
         }
     }
 
@@ -117,9 +117,9 @@ async function joinRoom(){
 
     $('#answer-box').text(JSON.stringify(answer));
     // $('#answer-box').text(answer.sdp);
-    globalAnswer = answer;
+    // globalAnswer = answer;
 
-    pcb = pc;
+    // pcb = pc;
 
 }
 
@@ -169,8 +169,6 @@ function incomingMessage(event){
 
 
 //ok now what
-//add cheat connection
-//make git add/commit shortcuts
 //deactivate buttons
 //better formatted ID/address
 //copy-paste button for these
@@ -188,9 +186,11 @@ function incomingMessage(event){
 //rename room key -- asymmetric?  vs passcode?
 //limit to alexandras
 
-//done
+//done:
 //replace globals with pasting
 //input boxes and such
+//make git add/commit shortcuts
+//add cheat connection
 
 
 //
@@ -288,45 +288,31 @@ function incomingMessage(event){
 // };
 
 
-
 async function cheatSetup(){
     console.log('cheat setup');
-    let pc = new RTCPeerConnection();
-    let dc = pc.createDataChannel('taco');
+    let pc1 = new RTCPeerConnection();
+    dc = pc1.createDataChannel('taco');
     // dc.onmessage = incomingMessage;
-    let offer = await pc.createOffer();
-    let desc = pc.setLocalDescription(offer);
-    pca = pc;
+    let offer = await pc1.createOffer();
+    let desc = pc1.setLocalDescription(offer);
     dcg = dc;
-    pc.onicecandidate = async function(candidate){
+    pc1.onicecandidate = async function(candidate){
         if(candidate.candidate == null){
-            let offer = await pc.createOffer();
-            globalOffer = offer;
             finishSetup();
         }
     }
     async function finishSetup(){
-        // let offer = await pc.createOffer();
-        // globalOffer = offer;
-
-        let pc = new RTCPeerConnection();
-        pc.ondatachannel = function(event){
-            let channel = event.channel;
-            channel.onmessage = incomingMessage;
+        let pc2 = new RTCPeerConnection();
+        pc2.ondatachannel = function(event){
+            event.channel.onmessage = incomingMessage;
             // channel.onmessage = inMsg2;
-            // dcg = channel;
             // dcx = channel;
         }
-
-        await pc.setRemoteDescription(globalOffer);
-        let answer = await pc.createAnswer();
-        await pc.setLocalDescription(answer);
-        
-        globalAnswer = answer;
-
-        pcb = pc;
-
-        await pca.setRemoteDescription(globalAnswer);
-
+        offer = await pc1.createOffer();
+        await pc2.setRemoteDescription(offer);
+        let answer = await pc2.createAnswer();
+        await pc2.setLocalDescription(answer);
+        // pcb = pc;
+        await pc1.setRemoteDescription(answer);
     }
 }
