@@ -75,12 +75,17 @@ async function joinRoom(){
         }
     }
     
-    let text = $('#offer-box').text();
-    console.log("offer val", text);
-    let parsed = JSON.parse(text);
-    console.log("parsed: ", parsed);
+    // let text = $('#offer-box').text();
+    // console.log("offer val", text);
+    // let parsed = JSON.parse(text);
+    // console.log("parsed: ", parsed);
 
-    await pc.setRemoteDescription(parsed);
+    // await pc.setRemoteDescription(parsed);
+    let paste = $('#paste').val();
+    console.log("paste: ",paste)
+    let json = JSON.parse(paste);
+    console.log("json: ",json)
+    await pc.setRemoteDescription(json);
     // await pc.setRemoteDescription(globalOffer);
     console.log('remote description set', pc.remoteDescription);
 
@@ -90,7 +95,8 @@ async function joinRoom(){
     await pc.setLocalDescription(answer);
     console.log('local desc created', pc.localDescription);
 
-    $('#answer-box').text(answer.sdp);
+    $('#answer-box').text(JSON.stringify(answer));
+    // $('#answer-box').text(answer.sdp);
     globalAnswer = answer;
 
     pcb = pc;
@@ -100,7 +106,10 @@ async function joinRoom(){
 $('#connect').on('click', makeConnection)
 
 async function makeConnection(){
-    await pca.setRemoteDescription(globalAnswer);
+    let paste2 = $('#paste2').val();
+    let json2 = JSON.parse(paste2);
+    await pca.setRemoteDescription(json2);
+    // await pca.setRemoteDescription(globalAnswer);
     console.log('partner remote desc set', pca.remoteDescription);
 }
 
@@ -114,11 +123,11 @@ function sendMessage(){
     let message = "_msg"+msgCount;
     $('#outbox').append(message);
 
-    // setTimeout(() => {
-    //     dcg.send(message);
-    // }, 500)
+    setTimeout(() => {
+        dcg.send(message);
+    }, 100)
 
-    dcg.send(message);
+    // dcg.send(message);
 
     msgCount++;
 }
@@ -135,9 +144,19 @@ function sendMessage(){
 //sockets
 //OH and load script & css into single html file
 //for portability
+//implement try/catch blocks also?
+//switch vanilla instead of JQ
+//obfuscate chat-id
+//rename room key -- asymmetric?  vs passcode?
+//limit to alexandras
+
+//
+//
 
 //list what didn't need!
 //all that SDP crap!
+
+//
 
 //plan:
 
