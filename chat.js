@@ -7,6 +7,13 @@ let pca;
 let pcb;
 let dcg;
 
+$('#cheat').on('click', cheatSetup);
+
+function cheatSetup(){
+    console.log('cheat setup');
+}
+
+
 $('#create').on('click', createRoom);
 
 function createRoom(){
