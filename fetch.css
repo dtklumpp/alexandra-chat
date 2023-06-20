@@ -12,11 +12,25 @@ body {
 }
 
 button {
-    width: 75px;
+    min-width: 75px;
+    /* width: 75px; */
     height: 30px;
 }
 
 .snug {
     /* display: inline-block; */
     width: fit-content;
+}
+
+textarea {
+    width: 20rem;
+    text-align: left;
+}
+
+#chatbox {
+    background-color: white;
+    width: 20rem;
+    border: 1px solid black;
+    height: 10rem;
+    overflow: scroll;
 }

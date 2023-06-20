@@ -11,11 +11,29 @@ let dcg;
 $('#cheat').on('click', cheatSetup);
 // let dcx;
 
+const setupArea = $('#setup-area');
+const createArea = $('#create-area');
+const joinArea = $('#join-area');
+const answerArea = $('#answer-area');
+const connectArea = $('#connect-area');
+const chatArea = $('#chat-area');
+
+createArea.hide();
+joinArea.hide();
+answerArea.hide();
+connectArea.hide();
+// chatArea.hide();
+
+
+
 
 
 $('#create').on('click', createRoom);
 
 function createRoom(){
+
+    setupArea.hide();
+    createArea.show();
     
     let pc = new RTCPeerConnection();
     // console.log(pc)
@@ -66,7 +84,8 @@ function createRoom(){
             // console.log("local2", pc.localDescription)
 
             console.log("offer origin: ", offer);
-            $('#offer-box').text(JSON.stringify(offer));
+            // $('#offer-box').text(JSON.stringify(offer));
+            $('#offer-box').val(JSON.stringify(offer));
             // $('#offer-box').text(offer.sdp);
             // globalOffer = offer;
         }
@@ -77,6 +96,32 @@ function createRoom(){
     
 }
 
+
+$('#copy-offer').on('click', function(){
+    let key = $('#offer-box').val();
+    navigator.clipboard.writeText(key);
+})
+
+$('#sent').on('click', function(){
+    createArea.hide();
+    connectArea.show();
+})
+
+
+
+$('#piggyback').on('click', () => {
+    setupArea.hide();
+    joinArea.show();
+})
+
+$('#sent-back').on('click', () => {
+    answerArea.hide();
+    chatArea.show();
+})
+
+
+
+
 $('#join').on('click', joinRoom);
 
 
@@ -84,6 +129,10 @@ $('#join').on('click', joinRoom);
 
 
 async function joinRoom(){
+
+    joinArea.hide();
+    answerArea.show();
+
     let pc = new RTCPeerConnection();
     pc.ondatachannel = function(event){
         let channel = event.channel;
@@ -116,7 +165,8 @@ async function joinRoom(){
     await pc.setLocalDescription(answer);
     console.log('local desc created', pc.localDescription);
 
-    $('#answer-box').text(JSON.stringify(answer));
+    // $('#answer-box').text(JSON.stringify(answer));
+    $('#answer-box').val(JSON.stringify(answer));
     // $('#answer-box').text(answer.sdp);
     // globalAnswer = answer;
 
@@ -129,6 +179,10 @@ $('#connect').on('click', makeConnection)
 
 
 async function makeConnection(){
+
+    connectArea.hide();
+    chatArea.show();
+
     let paste2 = $('#paste2').val();
     let json2 = JSON.parse(paste2);
     await pca.setRemoteDescription(json2);
@@ -144,6 +198,12 @@ $('#send').on('click', sendMessage);
 
 function sendMessage(){
     let message = $('#message').val();
+
+    let chat = $('<div/>').text(message);
+    chat.css('color', 'blue');
+    // $('#inbox').append(chat);
+    $('#chatbox').append(chat);
+
     $('#outbox').append(message);
     
     setTimeout(() => {
@@ -165,27 +225,48 @@ function sendMessage(){
 
 function incomingMessage(event){
     let data = event.data;
-    $('#inbox').append(data);
+    let chat = $('<div/>').text("host: "+data);
+    chat.css('color', 'green');
+    // $('#inbox').append(chat);
+    $('#chatbox').append(chat);
+    // $('#inbox').append(data);
 }
 
 
+
+
 //ok now what
+
+//add names
+
 //deactivate buttons
-//better formatted ID/address
+// show/hide fields
 //copy-paste button for these
+//rename room key -- asymmetric?  vs passcode?
+//add prompts
+
+//better formatted ID/address
+//obfuscate chat-id
+
 //add name prompt
-//error-checks
-//callbacks?
-//exit and close buttons
-//files/audio
-//sockets
+//limit to alexandras
+
 //OH and load script & css into single html file
 //for portability
+
 //implement try/catch blocks also?
+//error-checks
+
+//exit and close buttons
+
+//improve function organization
+
+//callbacks?
+
+//files/audio
+//sockets
+
 //switch vanilla instead of JQ
-//obfuscate chat-id
-//rename room key -- asymmetric?  vs passcode?
-//limit to alexandras
 
 //done:
 //replace globals with pasting
@@ -193,6 +274,11 @@ function incomingMessage(event){
 //make git add/commit shortcuts
 //add cheat connection
 
+//add who is online
+//on the host Websockets site
+
+
+//add email chats to save them
 
 //
 //
