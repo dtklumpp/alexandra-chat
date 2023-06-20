@@ -150,10 +150,12 @@ function incomingMessage(event){
 }
 
 //ok now what
-//replace globals with pasting
+//add cheat connection
+//make git add/commit shortcuts
 //deactivate buttons
-//input boxes and such
 //better formatted ID/address
+//copy-paste button for these
+//add name prompt
 //error-checks
 //callbacks?
 //exit and close buttons
@@ -168,6 +170,8 @@ function incomingMessage(event){
 //limit to alexandras
 
 //done
+//replace globals with pasting
+//input boxes and such
 
 
 //
