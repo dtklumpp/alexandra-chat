@@ -38,6 +38,7 @@ function createRoom(){
         console.log('initial offer created');
         pc.setLocalDescription(offer).then(desc => {
             console.log('description created');
+            console.log(desc);
         })
         // console.log("offer1", offer.sdp);
         // console.log("local1", pc.localDescription)
@@ -291,19 +292,20 @@ function incomingMessage(event){
 async function cheatSetup(){
     console.log('cheat setup');
     let pc1 = new RTCPeerConnection();
-    dc = pc1.createDataChannel('taco');
+    dc = pc1.createDataChannel('default');
     // dc.onmessage = incomingMessage;
     let offer = await pc1.createOffer();
-    let desc = pc1.setLocalDescription(offer);
+    await pc1.setLocalDescription(offer);
+    // console.log('desc: ',desc);
     dcg = dc;
-    pc1.onicecandidate = async function(candidate){
+    pc1.onicecandidate = (candidate) => {
         if(candidate.candidate == null){
             finishSetup();
         }
     }
     async function finishSetup(){
         let pc2 = new RTCPeerConnection();
-        pc2.ondatachannel = function(event){
+        pc2.ondatachannel = (event) => {
             event.channel.onmessage = incomingMessage;
             // channel.onmessage = inMsg2;
             // dcx = channel;
