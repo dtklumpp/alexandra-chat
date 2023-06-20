@@ -17,10 +17,11 @@ function createRoom(){
     // console.log(dc)
 
     //new for cross-tab
-    dc.onmessage = function(event){
-        let data = event.data
-        $('#inbox').append(data);
-    }
+    dc.onmessage = incomingMessage;
+    // dc.onmessage = function(event){
+    //     let data = event.data
+    //     $('#inbox').append(data);
+    // }
 
 
     //must set local description initially
@@ -75,10 +76,12 @@ async function joinRoom(){
     let pc = new RTCPeerConnection();
     pc.ondatachannel = function(event){
         let channel = event.channel;
-        channel.onmessage = function(event){
-            let data = event.data
-            $('#inbox').append(data);
-        }
+        
+        channel.onmessage = incomingMessage;
+        // channel.onmessage = function(event){
+        //     let data = event.data
+        //     $('#inbox').append(data);
+        // }
         dcg = channel;
     }
     
@@ -141,6 +144,11 @@ function sendMessage(){
     $('#message').val(placeholder);
 }
 
+function incomingMessage(event){
+    let data = event.data;
+    $('#inbox').append(data);
+}
+
 //ok now what
 //replace globals with pasting
 //deactivate buttons
@@ -158,6 +166,9 @@ function sendMessage(){
 //obfuscate chat-id
 //rename room key -- asymmetric?  vs passcode?
 //limit to alexandras
+
+//done
+
 
 //
 //
