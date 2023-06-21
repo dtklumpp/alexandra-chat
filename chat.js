@@ -400,8 +400,11 @@ async function cheatSetup(){
     async function finishSetup(){
         let pc2 = new RTCPeerConnection();
         pc2.ondatachannel = (event) => {
+            // let channel = event.channel;
+            // channel.onmessage = incomingMessage;
             event.channel.onmessage = incomingMessage;
             // channel.onmessage = inMsg2;
+            // dcg = event.channel;
             // dcx = channel;
         }
         offer = await pc1.createOffer();
@@ -410,5 +413,11 @@ async function cheatSetup(){
         await pc2.setLocalDescription(answer);
         // pcb = pc;
         await pc1.setRemoteDescription(answer);
+        setupArea.show();
+        createArea.show();
+        joinArea.show();
+        answerArea.show();
+        connectArea.show();
+        chatArea.show();
     }
 }
