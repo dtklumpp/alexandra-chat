@@ -22,7 +22,7 @@ createArea.hide();
 joinArea.hide();
 answerArea.hide();
 connectArea.hide();
-// chatArea.hide();
+chatArea.hide();
 
 
 
@@ -101,6 +101,10 @@ $('#copy-offer').on('click', function(){
     let key = $('#offer-box').val();
     navigator.clipboard.writeText(key);
 })
+$('#copy-answer').on('click', function(){
+    let key = $('#answer-box').val();
+    navigator.clipboard.writeText(key);
+})
 
 $('#sent').on('click', function(){
     createArea.hide();
@@ -135,6 +139,7 @@ async function joinRoom(){
 
     let pc = new RTCPeerConnection();
     pc.ondatachannel = function(event){
+        console.log('got to ondatachannel');
         let channel = event.channel;
         
         channel.onmessage = incomingMessage;
@@ -232,18 +237,26 @@ function incomingMessage(event){
     // $('#inbox').append(data);
 }
 
+//done:
+//replace globals with pasting
+//input boxes and such
+//make git add/commit shortcuts
+//add cheat connection
+// show/hide fields
+//copy-paste button for these
+//rename room key -- asymmetric?  vs passcode?
+//add prompts
+
 
 
 
 //ok now what
 
+//fix bugs
+
 //add names
 
 //deactivate buttons
-// show/hide fields
-//copy-paste button for these
-//rename room key -- asymmetric?  vs passcode?
-//add prompts
 
 //better formatted ID/address
 //obfuscate chat-id
@@ -268,11 +281,6 @@ function incomingMessage(event){
 
 //switch vanilla instead of JQ
 
-//done:
-//replace globals with pasting
-//input boxes and such
-//make git add/commit shortcuts
-//add cheat connection
 
 //add who is online
 //on the host Websockets site
