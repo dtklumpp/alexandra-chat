@@ -9,6 +9,7 @@ let dcg;
 
 //for same-page debugging
 $('#cheat').on('click', cheatSetup);
+$('#deactivate').on('click', disableButtons);
 // let dcx;
 
 const setupArea = $('#setup-area');
@@ -122,6 +123,10 @@ $('#sent-back').on('click', () => {
     answerArea.hide();
     chatArea.show();
 })
+
+function disableButtons(){
+    $('#cheat').prop('disabled', !$('#cheat').prop('disabled'));
+}
 
 
 
@@ -246,17 +251,14 @@ function incomingMessage(event){
 //copy-paste button for these
 //rename room key -- asymmetric?  vs passcode?
 //add prompts
-
+//fix bugs
+//tweak spacing format
 
 
 
 //ok now what
 
-//fix bugs
-
 //add names
-
-//deactivate buttons
 
 //better formatted ID/address
 //obfuscate chat-id
@@ -293,6 +295,9 @@ function incomingMessage(event){
 
 //list what didn't need!
 //all that SDP crap!
+
+//deactivate buttons
+//i had a different solution here
 
 //
 

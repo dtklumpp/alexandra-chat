@@ -14,6 +14,7 @@
     <div id="navbar-jq">| </div>
     <h2>chat</h2>
     <button id="cheat">(cheat)</button>
+    <button id="deactivate">(deactivate)</button>
     <br/>
     <br/>
     <div id="setup-area">
@@ -23,21 +24,24 @@
     <div id="create-area">
         <h3>send this room key to your chat partner:</h3>
         <!-- <p id="offer-box">[offer]</p> -->
-        <input id="offer-box" value="[generating...]"></input>
+        <input id="offer-box" placeholder="[generating...]"></input>
+        <!-- <input id="offer-box" value="[generating...]"></input> -->
         <button id="copy-offer">copy to clipboard</button>
         <br/>
         <br/>
-        <button id="sent">sent it!</button>
+        <button id="sent">done!</button>
     </div>
     <div id="join-area">
         <h3>paste the room key from your chat partner:</h3>
         <input id="paste" type="text">
         <br/>
+        <br/>
         <button id="join">turn key</button>
     </div>
     <div id="answer-area">
         <h3>send them back this "secret handshake"!</h3>
-        <input id="answer-box" value="[generating...]"></input>
+        <input id="answer-box" placeholder="[generating...]"></input>
+        <!-- <input id="answer-box" value="[generating...]"></input> -->
         <button id="copy-answer">copy to clipboard</button>
         <br/>
         <br/>
@@ -47,6 +51,7 @@
         <h3>paste the "secret handshake" they send back!</h3>
         <input id="paste2" type="text">
         <br/>
+        <br/>
         <button id="connect">connect</button>
     </div>
     <div id="chat-area">
@@ -54,7 +59,7 @@
         <!-- <textarea id="chatbox">
             [chat begins here]
         </textarea> -->
-        <br/>
+        <!-- <br/> -->
         <div id="chatbox">
             [chat begins here]
         </div>
