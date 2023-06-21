@@ -86,7 +86,8 @@ function createRoom(){
 
             console.log("offer origin: ", offer);
             // $('#offer-box').text(JSON.stringify(offer));
-            $('#offer-box').val(JSON.stringify(offer));
+            let offerKey = btoa(encodeURI(JSON.stringify(offer)));
+            $('#offer-box').val(offerKey);
             // $('#offer-box').text(offer.sdp);
             // globalOffer = offer;
         }
@@ -163,7 +164,7 @@ async function joinRoom(){
     // await pc.setRemoteDescription(parsed);
     let paste = $('#paste').val();
     console.log("paste: ",paste)
-    let json = JSON.parse(paste);
+    let json = JSON.parse(decodeURI(atob(paste)));
     console.log("json: ",json)
     await pc.setRemoteDescription(json);
     // await pc.setRemoteDescription(globalOffer);
@@ -176,7 +177,8 @@ async function joinRoom(){
     console.log('local desc created', pc.localDescription);
 
     // $('#answer-box').text(JSON.stringify(answer));
-    $('#answer-box').val(JSON.stringify(answer));
+    let answerKey = btoa(encodeURI(JSON.stringify(answer)))
+    $('#answer-box').val(answerKey);
     // $('#answer-box').text(answer.sdp);
     // globalAnswer = answer;
 
@@ -194,7 +196,7 @@ async function makeConnection(){
     chatArea.show();
 
     let paste2 = $('#paste2').val();
-    let json2 = JSON.parse(paste2);
+    let json2 = JSON.parse(decodeURI(atob(paste2)));
     await pca.setRemoteDescription(json2);
     // await pca.setRemoteDescription(globalAnswer);
     console.log('partner remote desc set', pca.remoteDescription);
@@ -253,6 +255,8 @@ function incomingMessage(event){
 //add prompts
 //fix bugs
 //tweak spacing format
+// test disable button
+
 
 
 
