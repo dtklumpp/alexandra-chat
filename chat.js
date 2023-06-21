@@ -126,6 +126,12 @@ $('#sent-back').on('click', () => {
 })
 
 function disableButtons(){
+    setupArea.show();
+    createArea.show();
+    joinArea.show();
+    answerArea.show();
+    connectArea.show();
+    chatArea.show();
     $('#cheat').prop('disabled', !$('#cheat').prop('disabled'));
 }
 
@@ -211,8 +217,9 @@ $('#send').on('click', sendMessage);
 function sendMessage(){
     let message = $('#message').val();
 
-    let chat = $('<div/>').text(message);
-    chat.css('color', 'blue');
+    let chat = $('<div/>').text("you: "+message);
+    chat.addClass('msg');
+    chat.css('color', '#009000');
     // $('#inbox').append(chat);
     $('#chatbox').append(chat);
 
@@ -237,8 +244,9 @@ function sendMessage(){
 
 function incomingMessage(event){
     let data = event.data;
-    let chat = $('<div/>').text("host: "+data);
-    chat.css('color', 'green');
+    let chat = $('<div/>').text(data);
+    chat.addClass('msg');
+    chat.css('color', 'darkviolet');
     // $('#inbox').append(chat);
     $('#chatbox').append(chat);
     // $('#inbox').append(data);
@@ -256,52 +264,69 @@ function incomingMessage(event){
 //fix bugs
 //tweak spacing format
 // test disable button
+//better formatted ID/address
+//obfuscate chat-id
+// review open tabs/docs for info
+// close open tabs/docs
+// review/close other codes
+// fix text overflow
 
 
 
 
 //ok now what
 
-//add names
+//make text look good
 
-//better formatted ID/address
-//obfuscate chat-id
+//enter to send!
+//scroll to bottom when sent
 
+//add names to chat
 //add name prompt
 //limit to alexandras
 
-//OH and load script & css into single html file
-//for portability
+//exit and close buttons
 
 //implement try/catch blocks also?
 //error-checks
+//for common errors
+//empty boxes mostly
+//and invalid keys
 
-//exit and close buttons
-
-//improve function organization
-
-//callbacks?
-
-//files/audio
-//sockets
+//OH and load script & css into single html file------
+//for portability
 
 //switch vanilla instead of JQ
 
+//improve function organization
 
+//more callbacks?
+//onclose and such?
+
+//files/audio------------------------------
+
+//sockets----------------------------------
 //add who is online
 //on the host Websockets site
 
+// email chats to save history-------------
 
-//add email chats to save them
+//encode favicon image as base-64?------------------
+
+//hover for modal explanation--------------
+//of e.g. what's the handshake
 
 //
 //
 
 //list what didn't need!
+
 //all that SDP crap!
 
 //deactivate buttons
 //i had a different solution here
+
+//declaring the STUN servers??
 
 //
 
@@ -422,11 +447,18 @@ async function cheatSetup(){
         await pc2.setLocalDescription(answer);
         // pcb = pc;
         await pc1.setRemoteDescription(answer);
-        setupArea.show();
-        createArea.show();
-        joinArea.show();
-        answerArea.show();
-        connectArea.show();
+        setupArea.hide();
         chatArea.show();
     }
 }
+
+// SAMPLE TEXT
+
+//Here's your "offer" -- it tells someone else how to connect to you. Send the whole thing to them, for example in an instant message or e-mail.
+
+//Now paste in the "answer" that was sent back to you.
+
+//The person who created the room will send you an "offer" string -- paste it here.
+
+//Here's your "answer" -- it tells someone else how to connect to you. Send the whole thing to them, for example in an instant message or e-mail.
+

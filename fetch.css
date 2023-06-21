@@ -1,6 +1,12 @@
 * {
     box-sizing: border-box;
+    /* scrollbar-color: red red; */
 }
+
+:root {
+    --base-color: #f4f4f4;
+}
+
 
 body {
     background-color: #f4f3db;
@@ -9,6 +15,7 @@ body {
     font-size: 1em;
     line-height: 1.5rem;
     margin-bottom: 1.5rem;
+    /* scrollbar-color: red red; */
 }
 
 button {
@@ -28,9 +35,45 @@ textarea {
 }
 
 #chatbox {
-    background-color: white;
+    background-color: var(--base-color);
+    /* background-color: white; */
     width: 20rem;
     border: 1px solid black;
     height: 10rem;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /* font-size: 14px; */
+    padding: 0.2em;
+    font-family: Helvetica;
+    /* scrollbar-color: red red;
+    scrollbar-base-color: red; */
+}
+
+body::-webkit-scrollbar {
+    background-color: red;
+    /* scrollbar-color: red red; */
+    /* width: 12px; */
+    /* width of the entire scrollbar */
+}
+
+
+#chatbox::-webkit-scrollbar {
+    background-color: var(--base-color);
+}
+
+/* 
+#chatbox::-webkit-scrollbar-thumb {
+    background-color: #f0f0f0;
+} */
+
+
+#chatbox::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 10px;
+    border: 3px solid var(--base-color);
+}
+
+.msg {
+    max-width: 18rem;
+    overflow-wrap: break-word;
 }
