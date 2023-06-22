@@ -12,10 +12,12 @@ body {
     background-color: #f4f3db;
     color: #333;
     font-family: sans-serif;
-    font-size: 1em;
-    line-height: 1.5rem;
+    /* font-size: 1em;
+    line-height: 1.5rem; */
     margin-bottom: 1.5rem;
     /* scrollbar-color: red red; */
+    font-size: 14px;
+    line-height: 20px;
 }
 
 button {
@@ -35,16 +37,18 @@ textarea {
 }
 
 #chatbox {
-    background-color: var(--base-color);
     /* background-color: white; */
-    width: 20rem;
+    background-color: var(--base-color);
+    /* width: 20rem; */
+    width: 25rem;
     border: 1px solid black;
     height: 10rem;
     overflow-y: scroll;
     overflow-x: hidden;
     /* font-size: 14px; */
     padding: 0.2em;
-    font-family: Helvetica;
+    /* font-family: Helvetica; */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     /* scrollbar-color: red red;
     scrollbar-base-color: red; */
 }
@@ -74,6 +78,9 @@ body::-webkit-scrollbar {
 }
 
 .msg {
-    max-width: 18rem;
+    max-width: 23rem;
+    /* max-width: 18rem; */
     overflow-wrap: break-word;
+    /* color: #468847; */
+    /* color: #3a87ad; */
 }

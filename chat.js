@@ -219,7 +219,9 @@ function sendMessage(){
 
     let chat = $('<div/>').text("you: "+message);
     chat.addClass('msg');
+
     chat.css('color', '#009000');
+    // chat.css('color', '#468847');
     // $('#inbox').append(chat);
     $('#chatbox').append(chat);
 
@@ -247,6 +249,7 @@ function incomingMessage(event){
     let chat = $('<div/>').text(data);
     chat.addClass('msg');
     chat.css('color', 'darkviolet');
+    // chat.css('color', '#3a87ad');
     // $('#inbox').append(chat);
     $('#chatbox').append(chat);
     // $('#inbox').append(data);
@@ -254,6 +257,7 @@ function incomingMessage(event){
 
 //done:
 //replace globals with pasting
+// 
 //input boxes and such
 //make git add/commit shortcuts
 //add cheat connection
@@ -261,6 +265,7 @@ function incomingMessage(event){
 //copy-paste button for these
 //rename room key -- asymmetric?  vs passcode?
 //add prompts
+// 
 //fix bugs
 //tweak spacing format
 // test disable button
@@ -270,16 +275,23 @@ function incomingMessage(event){
 // close open tabs/docs
 // review/close other codes
 // fix text overflow
+// format chat window
+// 
+//make text look good
+
+
 
 
 
 
 //ok now what
 
-//make text look good
+
+//add timestamps
 
 //enter to send!
 //scroll to bottom when sent
+//transition for ergonomic key-turnaround
 
 //add names to chat
 //add name prompt
