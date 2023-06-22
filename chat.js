@@ -217,7 +217,7 @@ $('#send').on('click', sendMessage);
 function sendMessage(){
     let message = $('#message').val();
 
-    let chat = $('<div/>').text("you: "+message);
+    let chat = $('<div/>').text(getTime()+message);
     chat.addClass('msg');
 
     chat.css('color', '#009000');
@@ -246,13 +246,19 @@ function sendMessage(){
 
 function incomingMessage(event){
     let data = event.data;
-    let chat = $('<div/>').text(data);
+    let chat = $('<div/>').text(getTime()+data);
     chat.addClass('msg');
     chat.css('color', 'darkviolet');
     // chat.css('color', '#3a87ad');
     // $('#inbox').append(chat);
     $('#chatbox').append(chat);
     // $('#inbox').append(data);
+}
+
+function getTime(){
+    let time = new Date();
+    let stamp = "["+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()+"] ";
+    return stamp;
 }
 
 //done:
@@ -278,6 +284,7 @@ function incomingMessage(event){
 // format chat window
 // 
 //make text look good
+//add timestamps
 
 
 
@@ -287,7 +294,7 @@ function incomingMessage(event){
 //ok now what
 
 
-//add timestamps
+//center it maybe?
 
 //enter to send!
 //scroll to bottom when sent
