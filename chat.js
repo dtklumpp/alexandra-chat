@@ -350,7 +350,8 @@ function sendMessage(){
     // dcg.send(message);
     
     msgCount++;
-    let placeholder = "_msg"+msgCount;
+    let placeholder = "";
+    // let placeholder = "_msg"+msgCount;
     $('#message').val(placeholder);
 }
 
@@ -580,6 +581,7 @@ async function cheatSetup(){
 //for common errors
 //empty boxes mostly
 //add exit and close button(s)
+//drop test messages
 
 // ========================================================================================
 
@@ -593,10 +595,11 @@ async function cheatSetup(){
 
 //handle invalid keys (try/catch?)
 
-//drop test messages
 
 //OH and load script & css into single html file------
 //for portability
+
+//add read receipts?
 
 //implement try/catch blocks also?
 
