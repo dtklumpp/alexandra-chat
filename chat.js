@@ -338,8 +338,13 @@ $('#send').on('click', sendMessage);
 
 function sendMessage(){
 
-    let message = $('#message').val();
+    let state = pca.connectionState;
+    if(state != "connected"){
+        announceSystem("no connection");
+        return;
+    }
 
+    let message = $('#message').val();
 
     if(message == "") {
         console.log('empty message');
@@ -599,6 +604,7 @@ async function cheatSetup(){
 //add exit and close button(s)
 //drop test messages
 //handle invalid keys (try/catch?)
+//add read receipts?
 
 // ========================================================================================
 
@@ -611,11 +617,9 @@ async function cheatSetup(){
 //limit to alexandras
 //update app name
 
-
 //OH and load script & css into single html file------
 //for portability
 
-//add read receipts?
 
 //switch vanilla instead of JQ
 
