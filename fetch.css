@@ -1,22 +1,96 @@
 * {
     box-sizing: border-box;
+    /* scrollbar-color: red red; */
 }
+
+:root {
+    --base-color: #f4f4f4;
+}
+
 
 body {
     background-color: #f4f3db;
     color: #333;
     font-family: sans-serif;
-    font-size: 1em;
-    line-height: 1.5rem;
+    /* font-size: 1em;
+    line-height: 1.5rem; */
     margin-bottom: 1.5rem;
+    /* scrollbar-color: red red; */
+    font-size: 14px;
+    line-height: 20px;
+    /*  */
+    display: flex;
 }
 
 button {
-    width: 75px;
+    min-width: 75px;
+    /* width: 75px; */
     height: 30px;
 }
 
 .snug {
     /* display: inline-block; */
     width: fit-content;
+}
+
+textarea {
+    width: 20rem;
+    text-align: left;
+}
+
+#chatbox {
+    /* background-color: white; */
+    background-color: var(--base-color);
+    /* width: 20rem; */
+    width: 25rem;
+    border: 1px solid black;
+    height: 10rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /* font-size: 14px; */
+    padding: 0.2em;
+    /* font-family: Helvetica; */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /* scrollbar-color: red red;
+    scrollbar-base-color: red; */
+}
+
+/* 
+body::-webkit-scrollbar {
+    background-color: red;
+} */
+
+
+
+#chatbox::-webkit-scrollbar {
+    background-color: var(--base-color);
+}
+
+/* 
+#chatbox::-webkit-scrollbar-thumb {
+    background-color: #f0f0f0;
+} */
+
+
+#chatbox::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 10px;
+    border: 3px solid var(--base-color);
+}
+
+.msg {
+    max-width: 23rem;
+    /* max-width: 18rem; */
+    overflow-wrap: break-word;
+    /* color: #468847; */
+    /* color: #3a87ad; */
+}
+
+#container {
+    margin-left: 15%;
+    /* margin: 0 auto; */
+    max-width: 25rem;
+}
+#navbar-jq{
+    width: 25rem;
 }

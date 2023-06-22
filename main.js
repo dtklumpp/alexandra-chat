@@ -117,27 +117,28 @@ jqnav.addClass('header');
 
 let links = [
     ['index', "./index.html"],
-    ['firstpage', "./firstpage.html"],
-    ['page3',"./page3.html"],
-    ['nada', null],
-    ['gridpage',"./gridpage.html"],
-    ['css-vars',"./varspage.html"],
-    ['fetch', "./fetch.html"],
-    ['storage','./storage.html'],
-    ['import', './import.html'],
+    // ['firstpage', "./firstpage.html"],
+    // ['page3',"./page3.html"],
+    // ['nada', null],
+    // ['gridpage',"./gridpage.html"],
+    // ['css-vars',"./varspage.html"],
+    // ['fetch', "./fetch.html"],
+    // ['storage','./storage.html'],
+    // ['import', './import.html'],
     ['chat','./chat.html'],
 ]
 
 for(let link of links){
     let title = link[0];
     let url = link[1];
-    let newbutton = $('<button/>');
+    // let newbutton = $('<button/>');
     let newanchor = $('<a/>');
-    newbutton.text(title);
+    newanchor.text(title);
+    // newbutton.text(title);
     if(url) newanchor.attr('href', url);
-    newanchor.append(newbutton);
+    // newanchor.append(newbutton);
     jqnav.append(newanchor);
-    jqnav.append(" ");
+    jqnav.append(" | ");
 }
 
 // newdiv = $('<div/>');
