@@ -33,10 +33,11 @@ button {
     width: fit-content;
 }
 
+/* 
 textarea {
     width: 20rem;
     text-align: left;
-}
+} */
 
 #chatbox {
     /* background-color: white; */
@@ -84,6 +85,10 @@ body::-webkit-scrollbar {
     overflow-wrap: break-word;
     /* color: #468847; */
     /* color: #3a87ad; */
+}
+#message{
+    width: 12rem;
+    overflow-wrap: break-word;
 }
 
 #container {

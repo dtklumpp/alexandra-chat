@@ -46,7 +46,14 @@ const chatArea = $('#chat-area');
 
 $('#paste').keypress((e)=>{if(e.which == 13) joinRoom();})
 $('#paste2').keypress((e)=>{if(e.which == 13) makeConnection();})
-$('#message').keypress((e)=>{if(e.which == 13) sendMessage();})
+
+// $('#message').keypress((e)=>{if(e.which == 13) sendMessage();})
+$('#message').keyup((e)=>{if(e.which == 13) sendMessage();})
+
+$('#message').keypress((e)=>{if(e.which == 70) {
+    // e.preventDefault();
+    sendMessage();
+}})
 
 
 
@@ -373,7 +380,14 @@ function sendMessage(){
     msgCount++;
     let placeholder = "";
     // let placeholder = "_msg"+msgCount;
-    $('#message').val(placeholder);
+    $('#message').val(placeholder);    
+
+    // setTimeout(() => {
+    //     $('#message').val("");    
+    // }, 0)
+
+
+
 }
 
 // function inMsg2(event){
@@ -605,21 +619,23 @@ async function cheatSetup(){
 //drop test messages
 //handle invalid keys (try/catch?)
 //add read receipts?
+//bigger typing box?
 
 // ========================================================================================
 
 //ok now what
 
-//bigger typing box?
 
 //add names to chat
 //add name prompt
 //limit to alexandras
+
 //update app name
 
 //OH and load script & css into single html file------
 //for portability
 
+//add multi-line input
 
 //switch vanilla instead of JQ
 
