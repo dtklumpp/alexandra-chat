@@ -285,6 +285,8 @@ function sendMessage(){
     $('#chatbox').append(chat);
 
     $('#outbox').append(message);
+
+    $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight)
     
     setTimeout(() => {
         dcg.send(message);
@@ -312,6 +314,12 @@ function incomingMessage(event){
     // $('#inbox').append(chat);
     $('#chatbox').append(chat);
     // $('#inbox').append(data);
+    $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight)
+    // $('#chatbox').scrollTop(0)
+    // console.log($('#chatbox'))
+    // console.log($('#chatbox')[0])
+    // console.log($('#chatbox')[0].scrollHeight)
+
 }
 
 function getTime(){
@@ -496,12 +504,12 @@ async function cheatSetup(){
 //format clock
 // add chat connected msg
 //enter to send!
+//scroll to bottom when sent
 
 // ========================================================================================
 
 //ok now what
 
-//scroll to bottom when sent
 //transition for ergonomic key-turnaround
 
 //add names to chat
@@ -541,6 +549,8 @@ async function cheatSetup(){
 //of e.g. what's the handshake
 
 //let drag box around the page-------------
+
+//combine send-message functions-----------
 
 //
 //
