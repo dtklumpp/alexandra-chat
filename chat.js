@@ -257,8 +257,16 @@ function incomingMessage(event){
 
 function getTime(){
     let time = new Date();
-    let stamp = "["+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()+"] ";
+    let hours = formatClock(time.getHours())
+    let minutes = formatClock(time.getMinutes())
+    let seconds = formatClock(time.getSeconds())
+    let stamp = "["+hours+":"+minutes+":"+seconds+"] ";
     return stamp;
+}
+
+function formatClock(num){
+    if(num < 10) return "0" + num;
+    return num;
 }
 
 //done:
@@ -295,7 +303,6 @@ function getTime(){
 //ok now what
 
 // add chat connected msg
-
 
 //enter to send!
 //scroll to bottom when sent
