@@ -18,6 +18,8 @@ body {
     /* scrollbar-color: red red; */
     font-size: 14px;
     line-height: 20px;
+    /*  */
+    display: flex;
 }
 
 button {
@@ -53,12 +55,11 @@ textarea {
     scrollbar-base-color: red; */
 }
 
+/* 
 body::-webkit-scrollbar {
     background-color: red;
-    /* scrollbar-color: red red; */
-    /* width: 12px; */
-    /* width of the entire scrollbar */
-}
+} */
+
 
 
 #chatbox::-webkit-scrollbar {
@@ -83,4 +84,13 @@ body::-webkit-scrollbar {
     overflow-wrap: break-word;
     /* color: #468847; */
     /* color: #3a87ad; */
+}
+
+#container {
+    margin-left: 15%;
+    /* margin: 0 auto; */
+    max-width: 25rem;
+}
+#navbar-jq{
+    width: 25rem;
 }

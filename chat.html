@@ -11,66 +11,70 @@
     <title>Chat</title>
 </head>
 <body>
-    <div id="navbar-jq">| </div>
-    <h2>chat</h2>
-    
-    <button id="cheat">(cheat)</button>
-    <button id="deactivate">(deactivate)</button>
-    <br/>
-    <br/>
+    <div id="container">
+        
+        <div id="navbar-jq">| </div>
+        <h2>chat</h2>
 
-    <div id="setup-area">
-        <button id="create">create a room</button>
-        <button id="piggyback">join a room</button>
-    </div>
-    <div id="create-area">
-        <h3>send this room key to your chat partner:</h3>
-        <!-- <p id="offer-box">[offer]</p> -->
-        <input id="offer-box" placeholder="[generating...]"></input>
-        <!-- <input id="offer-box" value="[generating...]"></input> -->
-        <button id="copy-offer">copy to clipboard</button>
+        <!-- <button id="cheat">(cheat)</button>
+        <button id="deactivate">(deactivate)</button>
         <br/>
-        <br/>
-        <button id="sent">done!</button>
-    </div>
-    <div id="join-area">
-        <h3>paste the room key from your chat partner:</h3>
-        <input id="paste" type="text">
-        <br/>
-        <br/>
-        <button id="join">turn key</button>
-    </div>
-    <div id="answer-area">
-        <h3>send them back this "secret handshake"!</h3>
-        <input id="answer-box" placeholder="[generating...]"></input>
-        <!-- <input id="answer-box" value="[generating...]"></input> -->
-        <button id="copy-answer">copy to clipboard</button>
-        <br/>
-        <br/>
-        <button id="sent-back">done!</button>
-    </div>
-    <div id="connect-area">
-        <h3>paste the "secret handshake" they send back!</h3>
-        <input id="paste2" type="text">
-        <br/>
-        <br/>
-        <button id="connect">connect</button>
-    </div>
-    <div id="chat-area">
-        <!-- <p id="outbox">outbox</p> -->
-        <!-- <textarea id="chatbox">
-            [chat begins here]
-        </textarea> -->
-        <!-- <br/> -->
-        <div id="chatbox">
-            [chat begins here]
+        <br/> -->
+
+        <div id="setup-area">
+            <button id="create">create a room</button>
+            <button id="piggyback">join a room</button>
         </div>
-        <br/>
-        <input id="message" type="text" placeholder="your message here">
-        <!-- <input id="message" type="text" value="msg0" placeholder="your message here"> -->
-        <br/>
-        <button id="send">send</button>
-        <!-- <p id="inbox">inbox</p> -->
+        <div id="create-area">
+            <h3>send this room key to your chat partner:</h3>
+            <!-- <h3>send this room key to your chat partner:send this room key to your chat partner:</h3> -->
+            <!-- <p id="offer-box">[offer]</p> -->
+            <input id="offer-box" placeholder="[generating...]"></input>
+            <!-- <input id="offer-box" value="[generating...]"></input> -->
+            <button id="copy-offer">copy to clipboard</button>
+            <br/>
+            <br/>
+            <button id="sent">done!</button>
+        </div>
+        <div id="join-area">
+            <h3>paste the room key from your chat partner:</h3>
+            <input id="paste" type="text">
+            <br/>
+            <br/>
+            <button id="join">turn key</button>
+        </div>
+        <div id="answer-area">
+            <h3>send them back this "secret handshake"!</h3>
+            <input id="answer-box" placeholder="[generating...]"></input>
+            <!-- <input id="answer-box" value="[generating...]"></input> -->
+            <button id="copy-answer">copy to clipboard</button>
+            <br/>
+            <br/>
+            <button id="sent-back">done!</button>
+        </div>
+        <div id="connect-area">
+            <h3>paste the "secret handshake" they send back!</h3>
+            <input id="paste2" type="text">
+            <br/>
+            <br/>
+            <button id="connect">connect</button>
+        </div>
+        <div id="chat-area">
+            <!-- <p id="outbox">outbox</p> -->
+            <!-- <textarea id="chatbox">
+                [chat begins here]
+            </textarea> -->
+            <!-- <br/> -->
+            <div id="chatbox">
+                [chat begins here]
+            </div>
+            <br/>
+            <input id="message" type="text" placeholder="your message here">
+            <!-- <input id="message" type="text" value="msg0" placeholder="your message here"> -->
+            <br/>
+            <button id="send">send</button>
+            <!-- <p id="inbox">inbox</p> -->
+        </div>
     </div>
 </body>
 </html>

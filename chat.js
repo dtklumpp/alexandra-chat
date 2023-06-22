@@ -285,6 +285,7 @@ function getTime(){
 // 
 //make text look good
 //add timestamps
+//center it maybe?
 
 
 
@@ -293,8 +294,8 @@ function getTime(){
 
 //ok now what
 
+// add chat connected msg
 
-//center it maybe?
 
 //enter to send!
 //scroll to bottom when sent
