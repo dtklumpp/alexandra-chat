@@ -27,6 +27,18 @@ chatArea.hide();
 
 
 
+// $('#paste').keypress((e)=>{
+//     console.log('keypress event: ', e);
+//     if(e.which == 13) joinRoom();
+// })
+
+$('#paste').keypress((e)=>{if(e.which == 13) joinRoom();})
+$('#paste2').keypress((e)=>{if(e.which == 13) makeConnection();})
+$('#message').keypress((e)=>{if(e.which == 13) sendMessage();})
+
+
+
+
 
 
 $('#create').on('click', createRoom);
@@ -483,15 +495,12 @@ async function cheatSetup(){
 //center it maybe?
 //format clock
 // add chat connected msg
-
+//enter to send!
 
 // ========================================================================================
 
-
 //ok now what
 
-
-//enter to send!
 //scroll to bottom when sent
 //transition for ergonomic key-turnaround
 
@@ -530,6 +539,8 @@ async function cheatSetup(){
 
 //hover for modal explanation--------------
 //of e.g. what's the handshake
+
+//let drag box around the page-------------
 
 //
 //
