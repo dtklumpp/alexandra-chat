@@ -10,10 +10,12 @@ let dcg;
 //for same-page debugging
 $('#cheat').on('click', cheatSetup);
 $('#deactivate').on('click', disableButtons);
+$('#hangup').on('click', cutConnection);
 // let dcx;
 
 const testArea = $('#testing-area');
-testArea.hide();
+// testArea.hide();
+testArea.show();
 
 const setupArea = $('#setup-area');
 const createArea = $('#create-area');
@@ -22,11 +24,18 @@ const answerArea = $('#answer-area');
 const connectArea = $('#connect-area');
 const chatArea = $('#chat-area');
 
-createArea.hide();
-joinArea.hide();
-answerArea.hide();
-connectArea.hide();
-chatArea.hide();
+// createArea.hide();
+// joinArea.hide();
+// answerArea.hide();
+// connectArea.hide();
+// chatArea.hide();
+
+// createArea.show();
+// joinArea.show();
+// answerArea.show();
+// connectArea.show();
+// chatArea.show();
+
 
 
 
@@ -56,6 +65,8 @@ function createRoom(){
     // console.log(pc)
     let dc = pc.createDataChannel('taco');
     // console.log(dc)
+    pca = pc;
+    dcg = dc;
 
     //new for cross-tab
     dc.onmessage = incomingMessage;
@@ -118,8 +129,6 @@ function createRoom(){
         }
     }
 
-    pca = pc;
-    dcg = dc;
     
 }
 
@@ -181,7 +190,6 @@ $('#piggyback').on('click', () => {
 $('#sent-back').on('click', () => {
     answerArea.hide();
     chatArea.show();
-    announceSystem("establishing...");
 })
 
 function disableButtons(){
@@ -192,6 +200,14 @@ function disableButtons(){
     connectArea.show();
     chatArea.show();
     $('#cheat').prop('disabled', !$('#cheat').prop('disabled'));
+}
+
+function cutConnection(){
+    dcg.close();
+    pca.close();
+    console.log("cnxn state: ",pca.connectionState);
+    announceSystem('chat closed...');
+    //weird, only shows closed for "Joiner" channel
 }
 
 
@@ -216,22 +232,24 @@ async function joinRoom(){
     // answerArea.show();
 
     let pc = new RTCPeerConnection();
+    pca = pc;
+
     pc.ondatachannel = function(event){
         // console.log('got to ondatachannel');
         console.log('data channel established');
-        let channel = event.channel;
+        let dc = event.channel;
+        dcg = dc;
         
-        channel.onmessage = incomingMessage;
+        dc.onmessage = incomingMessage;
         // channel.onmessage = function(event){
         //     let data = event.data
         //     $('#inbox').append(data);
         // }
-        dcg = channel;
-        channel.onopen = () => {
+        dc.onopen = () => {
             console.log('data channel opened');
             announceSystem("chat connected...");
         }
-        channel.onclose = () => {
+        dc.onclose = () => {
             console.log('data channel closed');
             announceSystem('data channel lost');
         }
@@ -263,11 +281,12 @@ async function joinRoom(){
     let answerKey = btoa(encodeURI(JSON.stringify(answer)))
     answerKey = "===="+answerKey;
     $('#answer-box').val(answerKey);
+
+    announceSystem("establishing...")
     // $('#answer-box').text(answer.sdp);
     // globalAnswer = answer;
 
     // pcb = pc;
-    pca = pc;
 
 }
 
@@ -486,14 +505,17 @@ async function cheatSetup(){
     console.log('cheat setup');
     let pc1 = new RTCPeerConnection();
     dc = pc1.createDataChannel('default');
-    pc1.onconnectionstatechange = statusUpdate;
     pca = pc1;
+    dcg = dc;
+
+
+    pc1.onconnectionstatechange = statusUpdate;
 
     // dc.onmessage = incomingMessage;
     let offer = await pc1.createOffer();
     await pc1.setLocalDescription(offer);
     // console.log('desc: ',desc);
-    dcg = dc;
+    
     pc1.onicecandidate = (candidate) => {
         if(candidate.candidate == null){
             finishSetup();
@@ -557,6 +579,7 @@ async function cheatSetup(){
 //error-checks
 //for common errors
 //empty boxes mostly
+//add exit and close button(s)
 
 // ========================================================================================
 
@@ -568,9 +591,9 @@ async function cheatSetup(){
 //add name prompt
 //limit to alexandras
 
-//exit and close buttons
-
 //handle invalid keys (try/catch?)
+
+//drop test messages
 
 //OH and load script & css into single html file------
 //for portability

@@ -16,9 +16,10 @@
         <div id="navbar-jq">| </div>
         <h2>chat</h2>
 
-        <div id="testing-area">
+        <div id="testing-area" hidden>
             <button id="cheat">(cheat)</button>
             <button id="deactivate">(deactivate)</button>
+            <button id="hangup">(cut connection)</button>
             <br/>
             <br/>
         </div>
@@ -27,7 +28,7 @@
             <button id="create">create a room</button>
             <button id="piggyback">join a room</button>
         </div>
-        <div id="create-area">
+        <div id="create-area" hidden>
             <h3>send this room key to your chat partner:</h3>
             <!-- <h3>send this room key to your chat partner:send this room key to your chat partner:</h3> -->
             <!-- <p id="offer-box">[offer]</p> -->
@@ -38,14 +39,14 @@
             <br/>
             <button id="sent">done!</button>
         </div>
-        <div id="join-area">
+        <div id="join-area" hidden>
             <h3>paste the room key from your chat partner:</h3>
             <input id="paste" type="text">
             <br/>
             <br/>
             <button id="join">turn key</button>
         </div>
-        <div id="answer-area">
+        <div id="answer-area" hidden>
             <h3 style="color:#3a87ad">send them back this "secret handshake"!</h3>
             <input id="answer-box" placeholder="[generating...]"></input>
             <!-- <input id="answer-box" value="[generating...]"></input> -->
@@ -54,7 +55,7 @@
             <br/>
             <button id="sent-back">done!</button>
         </div>
-        <div id="connect-area">
+        <div id="connect-area" hidden>
             <h3>paste the "secret handshake" they send back!</h3>
             <input id="paste2" type="text">
             <br/>
@@ -62,7 +63,7 @@
             <button id="connect">connect</button>
             <br/>
         </div>
-        <div id="chat-area">
+        <div id="chat-area" hidden>
             <!-- <p id="outbox">outbox</p> -->
             <!-- <textarea id="chatbox">
                 [chat begins here]
