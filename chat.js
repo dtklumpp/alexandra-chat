@@ -43,10 +43,14 @@ function createRoom(){
 
     //new for cross-tab
     dc.onmessage = incomingMessage;
+    dc.onopen = () => {
+        console.log('data channel open');
+    }
     // dc.onmessage = function(event){
     //     let data = event.data
     //     $('#inbox').append(data);
     // }
+    pc.onconnectionstatechange = statusUpdate;
 
 
     //must set local description initially
@@ -96,6 +100,36 @@ function createRoom(){
     pca = pc;
     dcg = dc;
     
+}
+
+function statusUpdate(event){
+    console.log("event: ", event);
+    switch(pca.connectionState){
+        case "new":
+            console.log('RPC new');
+            break;
+        case "checking":
+            console.log('RPC checking');
+            break;
+        case "connecting":
+            console.log('RPC establishing connection...');
+            break;
+        case "connected":
+            console.log('RPC connected!');
+            break;
+        case "disconnected":
+            console.log('RPC disconnected!');
+            break;
+        case "closed":
+            console.log('RPC closed');
+            break;
+        case "failed":
+            console.log("RPC failed");
+            break;
+        default:
+            console.log('RPC unknown status update');
+            break; 
+    }
 }
 
 
@@ -151,7 +185,8 @@ async function joinRoom(){
 
     let pc = new RTCPeerConnection();
     pc.ondatachannel = function(event){
-        console.log('got to ondatachannel');
+        // console.log('got to ondatachannel');
+        console.log('data channel received');
         let channel = event.channel;
         
         channel.onmessage = incomingMessage;
@@ -161,6 +196,8 @@ async function joinRoom(){
         // }
         dcg = channel;
     }
+    pc.onconnectionstatechange = statusUpdate;
+
     
     // let text = $('#offer-box').text();
     // console.log("offer val", text);
@@ -189,6 +226,7 @@ async function joinRoom(){
     // globalAnswer = answer;
 
     // pcb = pc;
+    pca = pc;
 
 }
 
@@ -269,93 +307,6 @@ function formatClock(num){
     return num;
 }
 
-//done:
-//replace globals with pasting
-// 
-//input boxes and such
-//make git add/commit shortcuts
-//add cheat connection
-// show/hide fields
-//copy-paste button for these
-//rename room key -- asymmetric?  vs passcode?
-//add prompts
-// 
-//fix bugs
-//tweak spacing format
-// test disable button
-//better formatted ID/address
-//obfuscate chat-id
-// review open tabs/docs for info
-// close open tabs/docs
-// review/close other codes
-// fix text overflow
-// format chat window
-// 
-//make text look good
-//add timestamps
-//center it maybe?
-
-
-
-
-
-
-//ok now what
-
-// add chat connected msg
-
-//enter to send!
-//scroll to bottom when sent
-//transition for ergonomic key-turnaround
-
-//add names to chat
-//add name prompt
-//limit to alexandras
-
-//exit and close buttons
-
-//implement try/catch blocks also?
-//error-checks
-//for common errors
-//empty boxes mostly
-//and invalid keys
-
-//OH and load script & css into single html file------
-//for portability
-
-//switch vanilla instead of JQ
-
-//improve function organization
-
-//more callbacks?
-//onclose and such?
-
-//files/audio------------------------------
-
-//sockets----------------------------------
-//add who is online
-//on the host Websockets site
-
-// email chats to save history-------------
-
-//encode favicon image as base-64?------------------
-
-//hover for modal explanation--------------
-//of e.g. what's the handshake
-
-//
-//
-
-//list what didn't need!
-
-//all that SDP crap!
-
-//deactivate buttons
-//i had a different solution here
-
-//declaring the STUN servers??
-
-//
 
 //plan:
 
@@ -444,10 +395,26 @@ function formatClock(num){
 // };
 
 
+
+// SAMPLE TEXT
+
+//Here's your "offer" -- it tells someone else how to connect to you. Send the whole thing to them, for example in an instant message or e-mail.
+
+//Now paste in the "answer" that was sent back to you.
+
+//The person who created the room will send you an "offer" string -- paste it here.
+
+//Here's your "answer" -- it tells someone else how to connect to you. Send the whole thing to them, for example in an instant message or e-mail.
+
+
+
 async function cheatSetup(){
     console.log('cheat setup');
     let pc1 = new RTCPeerConnection();
     dc = pc1.createDataChannel('default');
+    pc1.onconnectionstatechange = statusUpdate;
+    pca = pc1;
+
     // dc.onmessage = incomingMessage;
     let offer = await pc1.createOffer();
     await pc1.setLocalDescription(offer);
@@ -468,6 +435,7 @@ async function cheatSetup(){
             // dcg = event.channel;
             // dcx = channel;
         }
+
         offer = await pc1.createOffer();
         await pc2.setRemoteDescription(offer);
         let answer = await pc2.createAnswer();
@@ -479,13 +447,91 @@ async function cheatSetup(){
     }
 }
 
-// SAMPLE TEXT
+//done:
+//replace globals with pasting
+// 
+//input boxes and such
+//make git add/commit shortcuts
+//add cheat connection
+// show/hide fields
+//copy-paste button for these
+//rename room key -- asymmetric?  vs passcode?
+//add prompts
+// 
+//fix bugs
+//tweak spacing format
+// test disable button
+//better formatted ID/address
+//obfuscate chat-id
+// review open tabs/docs for info
+// close open tabs/docs
+// review/close other codes
+// fix text overflow
+// format chat window
+// 
+//make text look good
+//add timestamps
+//center it maybe?
+//format clock
 
-//Here's your "offer" -- it tells someone else how to connect to you. Send the whole thing to them, for example in an instant message or e-mail.
 
-//Now paste in the "answer" that was sent back to you.
+// ========================================================================================
 
-//The person who created the room will send you an "offer" string -- paste it here.
 
-//Here's your "answer" -- it tells someone else how to connect to you. Send the whole thing to them, for example in an instant message or e-mail.
+//ok now what
 
+// add chat connected msg
+
+//enter to send!
+//scroll to bottom when sent
+//transition for ergonomic key-turnaround
+
+//add names to chat
+//add name prompt
+//limit to alexandras
+
+//exit and close buttons
+
+//error-checks
+//for common errors
+//empty boxes mostly
+//and invalid keys
+
+//OH and load script & css into single html file------
+//for portability
+
+//implement try/catch blocks also?
+
+//switch vanilla instead of JQ
+
+//improve function organization
+
+//more callbacks?
+//onclose and such?
+
+//files/audio------------------------------
+
+//sockets----------------------------------
+//add who is online
+//on the host Websockets site
+
+// email chats to save history-------------
+
+//encode favicon image as base-64?------------------
+
+//hover for modal explanation--------------
+//of e.g. what's the handshake
+
+//
+//
+
+//list what didn't need!
+
+//all that SDP crap!
+
+//deactivate buttons
+//i had a different solution here
+
+//declaring the STUN servers??
+
+//
