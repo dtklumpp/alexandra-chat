@@ -227,10 +227,6 @@ async function joinRoom(){
     };
     // console.log("pasteval: ", $('#paste').val());
 
-    joinArea.hide();
-    answerArea.fadeIn(400);
-    // answerArea.show();
-
     let pc = new RTCPeerConnection();
     pca = pc;
 
@@ -265,9 +261,20 @@ async function joinRoom(){
     // await pc.setRemoteDescription(parsed);
     let paste = $('#paste').val();
     console.log("paste: ",paste)
-    let json = JSON.parse(decodeURI(atob(paste)));
-    console.log("json: ",json)
-    await pc.setRemoteDescription(json);
+    
+    try{
+        let json = JSON.parse(decodeURI(atob(paste)));
+        console.log("json: ",json)
+        await pc.setRemoteDescription(json);
+    } catch(err) {
+        console.log("invalid key: "+err);
+        return;
+    }
+
+    joinArea.hide();
+    answerArea.fadeIn(400);
+    // answerArea.show();
+
     // await pc.setRemoteDescription(globalOffer);
     console.log('remote description set', pc.remoteDescription);
 
@@ -300,14 +307,23 @@ async function makeConnection(){
         return;
     };
 
+
+    let paste2 = $('#paste2').val();
+    paste2 = paste2.slice(4);
+    
+    try{
+        let json2 = JSON.parse(decodeURI(atob(paste2)));
+        console.log("json: ",json2)
+        await pca.setRemoteDescription(json2);
+    } catch(err){
+        console.log("invalid handshake: "+err);
+        return;
+    }
+
     connectArea.hide();
     chatArea.show();
     announceSystem("establishing...")
 
-    let paste2 = $('#paste2').val();
-    paste2 = paste2.slice(4);
-    let json2 = JSON.parse(decodeURI(atob(paste2)));
-    await pca.setRemoteDescription(json2);
     // await pca.setRemoteDescription(globalAnswer);
     console.log('partner remote desc set', pca.remoteDescription);
 }
@@ -582,6 +598,7 @@ async function cheatSetup(){
 //empty boxes mostly
 //add exit and close button(s)
 //drop test messages
+//handle invalid keys (try/catch?)
 
 // ========================================================================================
 
@@ -592,8 +609,7 @@ async function cheatSetup(){
 //add names to chat
 //add name prompt
 //limit to alexandras
-
-//handle invalid keys (try/catch?)
+//update app name
 
 
 //OH and load script & css into single html file------
@@ -601,14 +617,14 @@ async function cheatSetup(){
 
 //add read receipts?
 
-//implement try/catch blocks also?
-
 //switch vanilla instead of JQ
 
 //improve function organization
 
 //more callbacks?
 //onclose and such?
+
+//implement try/catch blocks also?
 
 //files/audio------------------------------
 
@@ -622,6 +638,7 @@ async function cheatSetup(){
 
 //hover for modal explanation--------------
 //of e.g. what's the handshake
+//or is distinct tooltip class
 
 //let drag box around the page-------------
 
