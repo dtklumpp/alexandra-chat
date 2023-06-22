@@ -46,6 +46,9 @@ function createRoom(){
     dc.onopen = () => {
         console.log('data channel open');
     }
+    dc.onclose = () => {
+        console.log('data channel closed');
+    }
     // dc.onmessage = function(event){
     //     let data = event.data
     //     $('#inbox').append(data);
@@ -186,7 +189,7 @@ async function joinRoom(){
     let pc = new RTCPeerConnection();
     pc.ondatachannel = function(event){
         // console.log('got to ondatachannel');
-        console.log('data channel received');
+        console.log('data channel established');
         let channel = event.channel;
         
         channel.onmessage = incomingMessage;
@@ -195,6 +198,12 @@ async function joinRoom(){
         //     $('#inbox').append(data);
         // }
         dcg = channel;
+        channel.onopen = () => {
+            console.log('data channel opened');
+        }
+        channel.onclose = () => {
+            console.log('data channel closed');
+        }
     }
     pc.onconnectionstatechange = statusUpdate;
 
@@ -473,6 +482,7 @@ async function cheatSetup(){
 //add timestamps
 //center it maybe?
 //format clock
+// add chat connected msg
 
 
 // ========================================================================================
@@ -480,7 +490,6 @@ async function cheatSetup(){
 
 //ok now what
 
-// add chat connected msg
 
 //enter to send!
 //scroll to bottom when sent
