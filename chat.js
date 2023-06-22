@@ -205,6 +205,12 @@ $('#join').on('click', joinRoom);
 
 async function joinRoom(){
 
+    if($('#paste').val() == "") {
+        console.log('empty input');
+        return;
+    };
+    // console.log("pasteval: ", $('#paste').val());
+
     joinArea.hide();
     answerArea.fadeIn(400);
     // answerArea.show();
@@ -268,8 +274,12 @@ async function joinRoom(){
 $('#connect').on('click', makeConnection)
 
 
-
 async function makeConnection(){
+
+    if($('#paste2').val() == "") {
+        console.log('empty input');
+        return;
+    };
 
     connectArea.hide();
     chatArea.show();
@@ -289,8 +299,17 @@ let msgCount = 0;
 
 $('#send').on('click', sendMessage);
 
+
+
 function sendMessage(){
+
     let message = $('#message').val();
+
+
+    if(message == "") {
+        console.log('empty message');
+        return;
+    };
 
     let chat = $('<div/>').text(getTime()+message);
     chat.addClass('msg');
@@ -535,6 +554,9 @@ async function cheatSetup(){
 //add chat connected system message
 //add disconnection messages
 //add better section transitions
+//error-checks
+//for common errors
+//empty boxes mostly
 
 // ========================================================================================
 
@@ -548,10 +570,7 @@ async function cheatSetup(){
 
 //exit and close buttons
 
-//error-checks
-//for common errors
-//empty boxes mostly
-//and invalid keys
+//handle invalid keys (try/catch?)
 
 //OH and load script & css into single html file------
 //for portability
