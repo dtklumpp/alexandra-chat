@@ -12,6 +12,9 @@ $('#cheat').on('click', cheatSetup);
 $('#deactivate').on('click', disableButtons);
 // let dcx;
 
+const testArea = $('#testing-area');
+testArea.hide();
+
 const setupArea = $('#setup-area');
 const createArea = $('#create-area');
 const joinArea = $('#join-area');
@@ -46,7 +49,8 @@ $('#create').on('click', createRoom);
 function createRoom(){
 
     setupArea.hide();
-    createArea.show();
+    createArea.fadeIn(400);
+    // createArea.show();
     
     let pc = new RTCPeerConnection();
     // console.log(pc)
@@ -57,9 +61,11 @@ function createRoom(){
     dc.onmessage = incomingMessage;
     dc.onopen = () => {
         console.log('data channel open');
+        announceSystem("chat connected...");
     }
     dc.onclose = () => {
         console.log('data channel closed');
+        announceSystem('data channel lost');
     }
     // dc.onmessage = function(event){
     //     let data = event.data
@@ -134,6 +140,7 @@ function statusUpdate(event){
             break;
         case "disconnected":
             console.log('RPC disconnected!');
+            announceSystem('chat disconnected...');
             break;
         case "closed":
             console.log('RPC closed');
@@ -159,19 +166,22 @@ $('#copy-answer').on('click', function(){
 
 $('#sent').on('click', function(){
     createArea.hide();
-    connectArea.show();
+    connectArea.fadeIn(400);
+    // connectArea.show();
 })
 
 
 
 $('#piggyback').on('click', () => {
     setupArea.hide();
-    joinArea.show();
+    joinArea.fadeIn(400);
+    // joinArea.show();
 })
 
 $('#sent-back').on('click', () => {
     answerArea.hide();
     chatArea.show();
+    announceSystem("establishing...");
 })
 
 function disableButtons(){
@@ -196,7 +206,8 @@ $('#join').on('click', joinRoom);
 async function joinRoom(){
 
     joinArea.hide();
-    answerArea.show();
+    answerArea.fadeIn(400);
+    // answerArea.show();
 
     let pc = new RTCPeerConnection();
     pc.ondatachannel = function(event){
@@ -212,9 +223,11 @@ async function joinRoom(){
         dcg = channel;
         channel.onopen = () => {
             console.log('data channel opened');
+            announceSystem("chat connected...");
         }
         channel.onclose = () => {
             console.log('data channel closed');
+            announceSystem('data channel lost');
         }
     }
     pc.onconnectionstatechange = statusUpdate;
@@ -242,6 +255,7 @@ async function joinRoom(){
 
     // $('#answer-box').text(JSON.stringify(answer));
     let answerKey = btoa(encodeURI(JSON.stringify(answer)))
+    answerKey = "===="+answerKey;
     $('#answer-box').val(answerKey);
     // $('#answer-box').text(answer.sdp);
     // globalAnswer = answer;
@@ -259,8 +273,10 @@ async function makeConnection(){
 
     connectArea.hide();
     chatArea.show();
+    announceSystem("establishing...")
 
     let paste2 = $('#paste2').val();
+    paste2 = paste2.slice(4);
     let json2 = JSON.parse(decodeURI(atob(paste2)));
     await pca.setRemoteDescription(json2);
     // await pca.setRemoteDescription(globalAnswer);
@@ -334,6 +350,16 @@ function getTime(){
 function formatClock(num){
     if(num < 10) return "0" + num;
     return num;
+}
+
+
+//combine this into sendmessage fxn
+function announceSystem(str){
+    let chat = $('<div/>').text(getTime()+"SYSTEM: "+str);
+    chat.addClass('msg');
+    chat.css('color', '#3a87ad');
+    $('#chatbox').append(chat);
+    $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight)
 }
 
 
@@ -505,12 +531,16 @@ async function cheatSetup(){
 // add chat connected msg
 //enter to send!
 //scroll to bottom when sent
+//transition for ergonomic key-turnaround
+//add chat connected system message
+//add disconnection messages
+//add better section transitions
 
 // ========================================================================================
 
 //ok now what
 
-//transition for ergonomic key-turnaround
+//bigger typing box?
 
 //add names to chat
 //add name prompt
