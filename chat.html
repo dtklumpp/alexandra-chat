@@ -14,7 +14,7 @@
     <div id="container">
         
         <div id="navbar-jq">| </div>
-        <h2>chat</h2>
+        <h2>alexandrachat</h2>
 
         <div id="testing-area" hidden>
             <button id="cheat">(cheat)</button>
@@ -24,7 +24,14 @@
             <br/>
         </div>
 
-        <div id="setup-area">
+        <div id="identity-area">
+            <h3 id="name-prompt">please enter your name OR the name of your desired chat partner</h3>
+            <input id="namebox" type="text">
+            <br/>
+            <br/>
+            <button id="name-submit">enter</button>
+        </div>
+        <div id="setup-area" hidden>
             <button id="create">create a room</button>
             <button id="piggyback">join a room</button>
         </div>
@@ -40,7 +47,7 @@
             <button id="sent">done!</button>
         </div>
         <div id="join-area" hidden>
-            <h3>paste the room key from your chat partner:</h3>
+            <h3 id="paste-instruction">paste the room key from your chat partner:</h3>
             <input id="paste" type="text">
             <br/>
             <br/>
@@ -56,11 +63,12 @@
             <button id="sent-back">done!</button>
         </div>
         <div id="connect-area" hidden>
-            <h3>paste the "secret handshake" they send back!</h3>
+            <h3 style="color:#3a87ad">paste the "secret handshake" they send back!</h3>
             <input id="paste2" type="text">
             <br/>
             <br/>
             <button id="connect">connect</button>
+            <br/>
             <br/>
         </div>
         <div id="chat-area" hidden>
@@ -73,7 +81,8 @@
                 [chat begins here]
             </div>
             <br/>
-            <input id="message" type="text" placeholder="your message here">
+            <!-- <input id="message" type="text" placeholder="your message here"> -->
+            <textarea id="message" type="text" placeholder="your message here"></textarea>
             <!-- <input id="message" type="text" value="msg0" placeholder="your message here"> -->
             <br/>
             <button id="send">send</button>

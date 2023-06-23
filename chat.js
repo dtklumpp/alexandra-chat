@@ -12,11 +12,13 @@ $('#cheat').on('click', cheatSetup);
 $('#deactivate').on('click', disableButtons);
 $('#hangup').on('click', cutConnection);
 // let dcx;
+$('#name-submit').on('click', verifyIdentity);
 
 const testArea = $('#testing-area');
 // testArea.hide();
-testArea.show();
+// testArea.show();
 
+const identityArea = $('#identity-area');
 const setupArea = $('#setup-area');
 const createArea = $('#create-area');
 const joinArea = $('#join-area');
@@ -24,12 +26,14 @@ const answerArea = $('#answer-area');
 const connectArea = $('#connect-area');
 const chatArea = $('#chat-area');
 
+// identityArea.hide();
 // createArea.hide();
 // joinArea.hide();
 // answerArea.hide();
 // connectArea.hide();
 // chatArea.hide();
 
+// identityArea.show();
 // createArea.show();
 // joinArea.show();
 // answerArea.show();
@@ -44,9 +48,68 @@ const chatArea = $('#chat-area');
 //     if(e.which == 13) joinRoom();
 // })
 
+//modify these to keydown?
 $('#paste').keypress((e)=>{if(e.which == 13) joinRoom();})
 $('#paste2').keypress((e)=>{if(e.which == 13) makeConnection();})
-$('#message').keypress((e)=>{if(e.which == 13) sendMessage();})
+
+// $('#message').keypress((e)=>{if(e.which == 13) sendMessage();})
+
+//THIS ONE WORKS
+//TRIGGERS AFTER NEWLINE INSERTED
+// $('#message').keyup((e)=>{if(e.which == 13) sendMessage();})
+
+//this fails
+// $('#message').keypress((e)=>{if(e.which == 70) {
+//     // e.preventDefault();
+//     sendMessage();
+// }})
+
+//also fails
+// $('#message').keydown((e)=>{if(e.which == 13) {
+//     e.preventDefault();
+//     sendMessage();
+// }})
+
+//THIS WORKS TOO
+//BETTER I THINK
+//HEADS OFF NEWLINE INSERTION
+//modify this to allow newline input
+//or, to allow DIV to process it
+// $('#message').keydown((e)=>{if(e.which == 13) {
+$('#message').keydown((e)=>{if(e.which == 13 && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+}})
+
+
+
+
+
+
+
+
+//trying to stop F from typing F
+//OK, this experiment explained a lot of weird behavior
+
+// $('#message').keydown((e)=>{
+//     if(e.which == 70){
+//         // e.preventDefault();
+//         console.log("F'ed DOWN")
+//     }
+// })
+// $('#message').keypress((e)=>{
+//     if(e.which == 70){
+//         // e.preventDefault();
+//         console.log("F'ed PRESS")
+//     }
+// })
+// $('#message').keyup((e)=>{
+//     if(e.which == 70){
+//         // e.preventDefault();
+//         console.log("F'ed UP")
+//     }
+// })
+
 
 
 
@@ -179,6 +242,35 @@ $('#sent').on('click', function(){
     // connectArea.show();
 })
 
+let sorry = `sorry!  "alexandrachat" currently only supports chats comprising at least one Alexandra node`
+
+function verifyIdentity(){
+    let name = $('#namebox').val();
+
+    if(name == "") {
+        console.log('no name entered');
+        $('#paste').css("color", "black");
+        return;
+    };
+
+
+    name = name.toLowerCase();
+    if(name === "alexandra"){
+        console.log('valid chat conditions ascertained');
+        identityArea.hide();
+        setupArea.fadeIn(400);
+    }
+    else{
+        console.log("name "+name+" invalid");
+        identityArea.hide();
+        $('#name-prompt').text(sorry);
+        $('#name-prompt').css('color', '#3a87ad');
+        $('#namebox').val('');
+        $('#namebox').attr('placeholder', 'please try again');
+        identityArea.fadeIn(400);
+    }
+}
+
 
 
 $('#piggyback').on('click', () => {
@@ -223,6 +315,7 @@ async function joinRoom(){
 
     if($('#paste').val() == "") {
         console.log('empty input');
+        $('#paste').css("color", "black");
         return;
     };
     // console.log("pasteval: ", $('#paste').val());
@@ -268,6 +361,10 @@ async function joinRoom(){
         await pc.setRemoteDescription(json);
     } catch(err) {
         console.log("invalid key: "+err);
+        $('#paste').css("color", "red");
+        alert('invalid key');
+        // $('#paste-instruction').hide();
+        // $('#paste-instruction').fadeIn(400);
         return;
     }
 
@@ -304,6 +401,7 @@ async function makeConnection(){
 
     if($('#paste2').val() == "") {
         console.log('empty input');
+        $('#paste2').css("color", "black");
         return;
     };
 
@@ -317,6 +415,7 @@ async function makeConnection(){
         await pca.setRemoteDescription(json2);
     } catch(err){
         console.log("invalid handshake: "+err);
+        $('#paste2').css("color", "red");
         return;
     }
 
@@ -373,7 +472,14 @@ function sendMessage(){
     msgCount++;
     let placeholder = "";
     // let placeholder = "_msg"+msgCount;
-    $('#message').val(placeholder);
+    $('#message').val(placeholder);    
+
+    // setTimeout(() => {
+    //     $('#message').val("");    
+    // }, 0)
+
+
+
 }
 
 // function inMsg2(event){
@@ -572,7 +678,7 @@ async function cheatSetup(){
 //make git add/commit shortcuts
 //add cheat connection
 // show/hide fields
-//copy-paste button for these
+//copy-paste button for fields
 //rename room key -- asymmetric?  vs passcode?
 //add prompts
 // 
@@ -582,8 +688,8 @@ async function cheatSetup(){
 //better formatted ID/address
 //obfuscate chat-id
 // review open tabs/docs for info
-// close open tabs/docs
-// review/close other codes
+    // close open tabs/docs
+    // review/close other codes
 // fix text overflow
 // format chat window
 // 
@@ -596,30 +702,41 @@ async function cheatSetup(){
 //scroll to bottom when sent
 //transition for ergonomic key-turnaround
 //add chat connected system message
-//add disconnection messages
+    //add disconnection messages
 //add better section transitions
 //error-checks
-//for common errors
-//empty boxes mostly
+    //for common errors
+    //empty boxes mostly
 //add exit and close button(s)
 //drop test messages
 //handle invalid keys (try/catch?)
 //add read receipts?
+//bigger typing box?
+//OH and load script & css into single html file------
+    //for portability
+    //allow multi-line input
+//add name prompt
+    //limit to alexandras
+//update app name
+//test across machines
 
 // ========================================================================================
 
 //ok now what
 
-//bigger typing box?
+//BUILD FILE AGAIN
+//REMOVE INDEX LINKS!
+//CLEAN CSS BLOCKS
+//RESTORE HTML LINK
 
-//add names to chat
-//add name prompt
-//limit to alexandras
-//update app name
+//write build script-----------------------
+//auto-delete comments?--------------------
 
-//OH and load script & css into single html file------
-//for portability
+//let return key enter name
 
+//work on Windows bugs
+
+//declare elements at top of page
 
 //switch vanilla instead of JQ
 
@@ -629,6 +746,8 @@ async function cheatSetup(){
 //onclose and such?
 
 //implement try/catch blocks also?
+
+//add names to chat
 
 //files/audio------------------------------
 

@@ -1,56 +1,6 @@
 let biff = "boff";
 console.log({biff});
 
-let count = 0;
-// export count;
-// export default biff;
-// module.exports = biff;
-
-// FOR "FIRSTPAGE"
-
-$('.butt').on('click', () => {
-    count++;
-    console.log('boo!-'+count); 
-    $('.ghost').toggle();
-})
-
-$('.butt1').on('click', () => {
-    count++;
-    console.log('foo!-'+count);
-    $('.page1').toggle();
-})
-
-$('.butt2').on('click', () => {
-    count++;
-    console.log('bar!-'+count);
-    $('.page2').toggle();
-})
-
-
-
-
-
-// FOR INDEX PAGE
-
-$('.button1').on('click', () => {
-    $('.hideit').toggle();
-})
-$('.button2').on('click', () => {
-    count++;
-    console.log('countit!-'+count);
-    $('.countit').text("countit!--"+count)
-})
-
-function showContent(){
-    $('.hideit').toggle();
-}
-
-// $('.toggle-web-comps').on('click', function(){
-//     $('.togglable').toggle();
-// })
-
-
-
 
 
 // MAKING NAVBAR WITH WEB COMPONENTS
@@ -116,7 +66,8 @@ jqnav.addClass('header');
 //currentTarget
 
 let links = [
-    ['index', "./index.html"],
+    // ['index', "./index.html"],
+    ['index', "./ChatApp2.html"],
     // ['firstpage', "./firstpage.html"],
     // ['page3',"./page3.html"],
     // ['nada', null],
@@ -125,7 +76,8 @@ let links = [
     // ['fetch', "./fetch.html"],
     // ['storage','./storage.html'],
     // ['import', './import.html'],
-    ['chat','./chat.html'],
+    ['chat','./ChatApp2.html'],
+    // ['chat','./chat.html'],
 ]
 
 for(let link of links){

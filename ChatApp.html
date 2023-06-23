@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    
+    
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            
+        }
+
+        :root {
+            --base-color: #f4f4f4;
+        }
+
+
+        body {
+            background-color: #f4f3db;
+            color: #333;
+            font-family: sans-serif;
+            margin-bottom: 1.5rem;
+            
+            font-size: 14px;
+            line-height: 20px;
+            
+            display: flex;
+        }
+
+        button {
+            min-width: 75px;
+            
+            height: 30px;
+        }
+
+        .snug {
+            
+            width: fit-content;
+        }
+
+
+        #chatbox {
+            
+            background-color: var(--base-color);
+            
+            width: 25rem;
+            border: 1px solid black;
+            height: 10rem;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            
+            padding: 0.2em;
+            
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+     
+
+
+
+        #chatbox::-webkit-scrollbar {
+            background-color: var(--base-color);
+        }
+
+
+        #chatbox::-webkit-scrollbar-thumb {
+            background-color: grey;
+            border-radius: 10px;
+            border: 3px solid var(--base-color);
+        }
+
+        .msg {
+            max-width: 23rem;
+            
+            overflow-wrap: break-word;
+            
+            
+        }
+        #message{
+            width: 12rem;
+            overflow-wrap: break-word;
+        }
+
+        #container {
+            margin-left: 15%;
+            
+            max-width: 25rem;
+        }
+        #navbar-jq{
+            width: 25rem;
+        }
+
+    </style>
+    <title>Chat</title>
+</head>
+<body>
+    <div id="container">
+        
+        <div id="navbar-jq">| </div>
+        <h2>chat</h2>
+
+        <div id="testing-area" hidden>
+            <button id="cheat">(cheat)</button>
+            <button id="deactivate">(deactivate)</button>
+            <button id="hangup">(cut connection)</button>
+            <br/>
+            <br/>
+        </div>
+
+        <div id="setup-area">
+            <button id="create">create a room</button>
+            <button id="piggyback">join a room</button>
+        </div>
+        <div id="create-area" hidden>
+            <h3>send this room key to your chat partner:</h3>
+            
+            
+            <input id="offer-box" placeholder="[generating...]"></input>
+            
+            <button id="copy-offer">copy to clipboard</button>
+            <br/>
+            <br/>
+            <button id="sent">done!</button>
+        </div>
+        <div id="join-area" hidden>
+            <h3>paste the room key from your chat partner:</h3>
+            <input id="paste" type="text">
+            <br/>
+            <br/>
+            <button id="join">turn key</button>
+        </div>
+        <div id="answer-area" hidden>
+            <h3 style="color:#3a87ad">send them back this "secret handshake"!</h3>
+            <input id="answer-box" placeholder="[generating...]"></input>
+            
+            <button id="copy-answer">copy to clipboard</button>
+            <br/>
+            <br/>
+            <button id="sent-back">done!</button>
+        </div>
+        <div id="connect-area" hidden>
+            <h3>paste the "secret handshake" they send back!</h3>
+            <input id="paste2" type="text">
+            <br/>
+            <br/>
+            <button id="connect">connect</button>
+            <br/>
+        </div>
+        <div id="chat-area" hidden>
+            
+            
+                [chat begins here]
+            </textarea> -->
+            
+            <div id="chatbox">
+                [chat begins here]
+            </div>
+            <br/>
+            
+            <textarea id="message" type="text" placeholder="your message here"></textarea>
+            
+            <br/>
+            <button id="send">send</button>
+            
+        </div>
+    </div>
+</body>
+<script>
+    console.log('top of singlepage script');
+    let biff = "boff";
+    console.log({biff});
+
+    let count = 0;
+    
+    
+    
+
+    
+
+    $('.butt').on('click', () => {
+        count++;
+        console.log('boo!-'+count); 
+        $('.ghost').toggle();
+    })
+
+    $('.butt1').on('click', () => {
+        count++;
+        console.log('foo!-'+count);
+        $('.page1').toggle();
+    })
+
+    $('.butt2').on('click', () => {
+        count++;
+        console.log('bar!-'+count);
+        $('.page2').toggle();
+    })
+
+
+
+
+
+    
+
+    $('.button1').on('click', () => {
+        $('.hideit').toggle();
+    })
+    $('.button2').on('click', () => {
+        count++;
+        console.log('countit!-'+count);
+        $('.countit').text("countit!--"+count)
+    })
+
+    function showContent(){
+        $('.hideit').toggle();
+    }
+
+    
+    
+    
+
+
+
+
+
+    
+
+    class NavBar extends HTMLElement {
+        
+        
+        
+        
+        connectedCallback() {
+            
+            
+
+            this.innerHTML = `
+            <div class="header">
+                <a href="./index.html"><button>index</button></a>
+                <a href="./firstpage.html"><button>firstpage</button></a>
+                <a href="./page3.html"><button>page3</button></a>
+                <button>nada</button>
+                <a href="./gridpage.html"><button>gridpage</button></a>
+                <a href="./varspage.html"><button>css-vars</button></a>
+            </div>
+            `;
+
+            
+            
+            
+            
+            
+            
+        }
+    }
+    customElements.define('main-nav', NavBar);
+
+
+
+
+
+
+
+    
+
+    const jqnav = $('#navbar-jq');
+    
+    
+    jqnav.addClass('header');
+    
+
+    let links = [
+        ['index', "./index.html"],
+        
+        ['chat','./chat.html'],
+    ]
+
+    for(let link of links){
+        let title = link[0];
+        let url = link[1];
+        
+        let newanchor = $('<a/>');
+        newanchor.text(title);
+        
+        if(url) newanchor.attr('href', url);
+        
+        jqnav.append(newanchor);
+        jqnav.append(" | ");
+    }
+
+    let pca;
+    
+    let dcg;
+
+    
+    $('#cheat').on('click', cheatSetup);
+    $('#deactivate').on('click', disableButtons);
+    $('#hangup').on('click', cutConnection);
+    
+
+    const testArea = $('#testing-area');
+    
+    testArea.show();
+
+    const setupArea = $('#setup-area');
+    const createArea = $('#create-area');
+    const joinArea = $('#join-area');
+    const answerArea = $('#answer-area');
+    const connectArea = $('#connect-area');
+    const chatArea = $('#chat-area');
+
+    $('#paste').keypress((e)=>{if(e.which == 13) joinRoom();})
+    $('#paste2').keypress((e)=>{if(e.which == 13) makeConnection();})
+
+    $('#message').keydown((e)=>{if(e.which == 13) {
+        e.preventDefault();
+        sendMessage();
+    }})
+
+
+
+
+
+
+
+    $('#create').on('click', createRoom);
+
+    function createRoom(){
+
+        setupArea.hide();
+        createArea.fadeIn(400);
+        
+        
+        let pc = new RTCPeerConnection();
+        
+        let dc = pc.createDataChannel('taco');
+        
+        pca = pc;
+        dcg = dc;
+
+        
+        dc.onmessage = incomingMessage;
+        dc.onopen = () => {
+            console.log('data channel open');
+            announceSystem("chat connected...");
+        }
+        dc.onclose = () => {
+            console.log('data channel closed');
+            announceSystem('data channel lost');
+        }
+        
+        
+        
+        
+        pc.onconnectionstatechange = statusUpdate;
+
+
+        
+        
+        
+        
+        pc.createOffer().then((offer)=>{
+            console.log('initial offer created');
+            pc.setLocalDescription(offer).then(desc => {
+                console.log('description created');
+                console.log(desc);
+            })
+            
+            
+            
+            
+        })
+
+        let icecount = 0;
+
+        pc.onicecandidate = async function(candidate){
+            console.log('new ice candidate');
+            
+            icecount++;
+            
+            
+            
+            
+            
+            
+            
+            if(candidate.candidate == null){
+                let offer = await pc.createOffer();
+                console.log('finished offer created');
+                
+                
+
+                console.log("offer origin: ", offer);
+                
+                let offerKey = btoa(encodeURI(JSON.stringify(offer)));
+                $('#offer-box').val(offerKey);
+                
+                
+            }
+        }
+
+        
+    }
+
+    function statusUpdate(event){
+        console.log("event: ", event);
+        switch(pca.connectionState){
+            case "new":
+                console.log('RPC new');
+                break;
+            case "checking":
+                console.log('RPC checking');
+                break;
+            case "connecting":
+                console.log('RPC establishing connection...');
+                break;
+            case "connected":
+                console.log('RPC connected!');
+                break;
+            case "disconnected":
+                console.log('RPC disconnected!');
+                announceSystem('chat disconnected...');
+                break;
+            case "closed":
+                console.log('RPC closed');
+                break;
+            case "failed":
+                console.log("RPC failed");
+                break;
+            default:
+                console.log('RPC unknown status update');
+                break; 
+        }
+    }
+
+
+    $('#copy-offer').on('click', function(){
+        let key = $('#offer-box').val();
+        navigator.clipboard.writeText(key);
+    })
+    $('#copy-answer').on('click', function(){
+        let key = $('#answer-box').val();
+        navigator.clipboard.writeText(key);
+    })
+
+    $('#sent').on('click', function(){
+        createArea.hide();
+        connectArea.fadeIn(400);
+        
+    })
+
+
+
+    $('#piggyback').on('click', () => {
+        setupArea.hide();
+        joinArea.fadeIn(400);
+        
+    })
+
+    $('#sent-back').on('click', () => {
+        answerArea.hide();
+        chatArea.show();
+    })
+
+    function disableButtons(){
+        setupArea.show();
+        createArea.show();
+        joinArea.show();
+        answerArea.show();
+        connectArea.show();
+        chatArea.show();
+        $('#cheat').prop('disabled', !$('#cheat').prop('disabled'));
+    }
+
+    function cutConnection(){
+        dcg.close();
+        pca.close();
+        console.log("cnxn state: ",pca.connectionState);
+        announceSystem('chat closed...');
+        
+    }
+
+
+
+
+    $('#join').on('click', joinRoom);
+
+
+
+
+
+    async function joinRoom(){
+
+        if($('#paste').val() == "") {
+            console.log('empty input');
+            return;
+        };
+        
+
+        let pc = new RTCPeerConnection();
+        pca = pc;
+
+        pc.ondatachannel = function(event){
+            
+            console.log('data channel established');
+            let dc = event.channel;
+            dcg = dc;
+            
+            dc.onmessage = incomingMessage;
+            
+            
+            
+            
+            dc.onopen = () => {
+                console.log('data channel opened');
+                announceSystem("chat connected...");
+            }
+            dc.onclose = () => {
+                console.log('data channel closed');
+                announceSystem('data channel lost');
+            }
+        }
+        pc.onconnectionstatechange = statusUpdate;
+
+        
+        
+        
+        
+        
+
+        
+        let paste = $('#paste').val();
+        console.log("paste: ",paste)
+        
+        try{
+            let json = JSON.parse(decodeURI(atob(paste)));
+            console.log("json: ",json)
+            await pc.setRemoteDescription(json);
+        } catch(err) {
+            console.log("invalid key: "+err);
+            return;
+        }
+
+        joinArea.hide();
+        answerArea.fadeIn(400);
+        
+
+        
+        console.log('remote description set', pc.remoteDescription);
+
+        let answer = await pc.createAnswer();
+        console.log('answer created', answer);
+
+        await pc.setLocalDescription(answer);
+        console.log('local desc created', pc.localDescription);
+
+        
+        let answerKey = btoa(encodeURI(JSON.stringify(answer)))
+        answerKey = "===="+answerKey;
+        $('#answer-box').val(answerKey);
+
+        announceSystem("establishing...")
+        
+        
+
+        
+
+    }
+
+    $('#connect').on('click', makeConnection)
+
+
+    async function makeConnection(){
+
+        if($('#paste2').val() == "") {
+            console.log('empty input');
+            return;
+        };
+
+
+        let paste2 = $('#paste2').val();
+        paste2 = paste2.slice(4);
+        
+        try{
+            let json2 = JSON.parse(decodeURI(atob(paste2)));
+            console.log("json: ",json2)
+            await pca.setRemoteDescription(json2);
+        } catch(err){
+            console.log("invalid handshake: "+err);
+            return;
+        }
+
+        connectArea.hide();
+        chatArea.show();
+        announceSystem("establishing...")
+
+        
+        console.log('partner remote desc set', pca.remoteDescription);
+    }
+
+
+
+    let msgCount = 0;
+
+    $('#send').on('click', sendMessage);
+
+
+
+    function sendMessage(){
+
+        let state = pca.connectionState;
+        if(state != "connected"){
+            announceSystem("no connection");
+            return;
+        }
+
+        let message = $('#message').val();
+
+        if(message == "") {
+            console.log('empty message');
+            return;
+        };
+
+        let chat = $('<div/>').text(getTime()+message);
+        chat.addClass('msg');
+
+        chat.css('color', '#009000');
+        
+        
+        $('#chatbox').append(chat);
+
+        $('#outbox').append(message);
+
+        $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight)
+        
+        setTimeout(() => {
+            dcg.send(message);
+            
+        }, 100)
+        
+        
+        
+        msgCount++;
+        let placeholder = "";
+        
+        $('#message').val(placeholder);    
+
+        
+        
+        
+
+
+
+    }
+
+    
+    
+    
+    
+
+    function incomingMessage(event){
+        let data = event.data;
+        let chat = $('<div/>').text(getTime()+data);
+        chat.addClass('msg');
+        chat.css('color', 'darkviolet');
+        
+        
+        $('#chatbox').append(chat);
+        
+        $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight)
+        
+        
+        
+        
+
+    }
+
+    function getTime(){
+        let time = new Date();
+        let hours = formatClock(time.getHours())
+        let minutes = formatClock(time.getMinutes())
+        let seconds = formatClock(time.getSeconds())
+        let stamp = "["+hours+":"+minutes+":"+seconds+"] ";
+        return stamp;
+    }
+
+    function formatClock(num){
+        if(num < 10) return "0" + num;
+        return num;
+    }
+
+
+    
+    function announceSystem(str){
+        let chat = $('<div/>').text(getTime()+"SYSTEM: "+str);
+        chat.addClass('msg');
+        chat.css('color', '#3a87ad');
+        $('#chatbox').append(chat);
+        $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight)
+    }
+
+
+    async function cheatSetup(){
+        console.log('cheat setup');
+        let pc1 = new RTCPeerConnection();
+        dc = pc1.createDataChannel('default');
+        pca = pc1;
+        dcg = dc;
+
+
+        pc1.onconnectionstatechange = statusUpdate;
+
+        
+        let offer = await pc1.createOffer();
+        await pc1.setLocalDescription(offer);
+        
+        
+        pc1.onicecandidate = (candidate) => {
+            if(candidate.candidate == null){
+                finishSetup();
+            }
+        }
+        async function finishSetup(){
+            let pc2 = new RTCPeerConnection();
+            pc2.ondatachannel = (event) => {
+                
+                
+                event.channel.onmessage = incomingMessage;
+                
+                
+                
+            }
+
+            offer = await pc1.createOffer();
+            await pc2.setRemoteDescription(offer);
+            let answer = await pc2.createAnswer();
+            await pc2.setLocalDescription(answer);
+            
+            await pc1.setRemoteDescription(answer);
+            setupArea.hide();
+            chatArea.show();
+        }
+    }
+
+
+
+
+</script>
+</html>
