@@ -725,10 +725,14 @@ async function cheatSetup(){
 //ok now what
 
 //BUILD FILE AGAIN
-//REMOVE INDEX LINK!
+//REMOVE INDEX LINKS!
+//CLEAN CSS BLOCKS
+//RESTORE HTML LINK
 
 //write build script-----------------------
 //auto-delete comments?--------------------
+
+//let return key enter name
 
 //work on Windows bugs
 

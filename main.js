@@ -67,7 +67,7 @@ jqnav.addClass('header');
 
 let links = [
     // ['index', "./index.html"],
-    ['index', "./ChatApp.html"],
+    ['index', "./ChatApp2.html"],
     // ['firstpage', "./firstpage.html"],
     // ['page3',"./page3.html"],
     // ['nada', null],
@@ -76,7 +76,7 @@ let links = [
     // ['fetch', "./fetch.html"],
     // ['storage','./storage.html'],
     // ['import', './import.html'],
-    ['chat','./ChatApp.html'],
+    ['chat','./ChatApp2.html'],
     // ['chat','./chat.html'],
 ]
 
