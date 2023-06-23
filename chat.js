@@ -638,7 +638,7 @@ async function cheatSetup(){
 //make git add/commit shortcuts
 //add cheat connection
 // show/hide fields
-//copy-paste button for these
+//copy-paste button for fields
 //rename room key -- asymmetric?  vs passcode?
 //add prompts
 // 
@@ -648,8 +648,8 @@ async function cheatSetup(){
 //better formatted ID/address
 //obfuscate chat-id
 // review open tabs/docs for info
-// close open tabs/docs
-// review/close other codes
+    // close open tabs/docs
+    // review/close other codes
 // fix text overflow
 // format chat window
 // 
@@ -662,16 +662,19 @@ async function cheatSetup(){
 //scroll to bottom when sent
 //transition for ergonomic key-turnaround
 //add chat connected system message
-//add disconnection messages
+    //add disconnection messages
 //add better section transitions
 //error-checks
-//for common errors
-//empty boxes mostly
+    //for common errors
+    //empty boxes mostly
 //add exit and close button(s)
 //drop test messages
 //handle invalid keys (try/catch?)
 //add read receipts?
 //bigger typing box?
+//OH and load script & css into single html file------
+    //for portability
+//allow multi-line input
 
 // ========================================================================================
 
@@ -683,12 +686,10 @@ async function cheatSetup(){
 
 //update app name
 
-//OH and load script & css into single html file------
-//for portability
-
-//add multi-line input---------------------
+//test across machines
 
 //write build script-----------------------
+//auto-delete comments?--------------------
 
 //switch vanilla instead of JQ
 
