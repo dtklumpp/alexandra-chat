@@ -12,11 +12,13 @@ $('#cheat').on('click', cheatSetup);
 $('#deactivate').on('click', disableButtons);
 $('#hangup').on('click', cutConnection);
 // let dcx;
+$('#name-submit').on('click', verifyIdentity);
 
 const testArea = $('#testing-area');
 // testArea.hide();
-testArea.show();
+// testArea.show();
 
+const identityArea = $('#identity-area');
 const setupArea = $('#setup-area');
 const createArea = $('#create-area');
 const joinArea = $('#join-area');
@@ -24,12 +26,14 @@ const answerArea = $('#answer-area');
 const connectArea = $('#connect-area');
 const chatArea = $('#chat-area');
 
+// identityArea.hide();
 // createArea.hide();
 // joinArea.hide();
 // answerArea.hide();
 // connectArea.hide();
 // chatArea.hide();
 
+// identityArea.show();
 // createArea.show();
 // joinArea.show();
 // answerArea.show();
@@ -238,6 +242,35 @@ $('#sent').on('click', function(){
     // connectArea.show();
 })
 
+let sorry = `sorry!  "alexandrachat" currently only supports chats comprising at least one Alexandra node`
+
+function verifyIdentity(){
+    let name = $('#namebox').val();
+
+    if(name == "") {
+        console.log('no name entered');
+        $('#paste').css("color", "black");
+        return;
+    };
+
+
+    name = name.toLowerCase();
+    if(name === "alexandra"){
+        console.log('valid chat conditions ascertained');
+        identityArea.hide();
+        setupArea.fadeIn(400);
+    }
+    else{
+        console.log("name "+name+" invalid");
+        identityArea.hide();
+        $('#name-prompt').text(sorry);
+        $('#name-prompt').css('color', '#3a87ad');
+        $('#namebox').val('');
+        $('#namebox').attr('placeholder', 'please try again');
+        identityArea.fadeIn(400);
+    }
+}
+
 
 
 $('#piggyback').on('click', () => {
@@ -329,6 +362,7 @@ async function joinRoom(){
     } catch(err) {
         console.log("invalid key: "+err);
         $('#paste').css("color", "red");
+        alert('invalid key');
         // $('#paste-instruction').hide();
         // $('#paste-instruction').fadeIn(400);
         return;
@@ -680,22 +714,23 @@ async function cheatSetup(){
 //bigger typing box?
 //OH and load script & css into single html file------
     //for portability
-//allow multi-line input
+    //allow multi-line input
+//add name prompt
+    //limit to alexandras
+//update app name
+//test across machines
 
 // ========================================================================================
 
 //ok now what
 
-//add names to chat
-//add name prompt
-//limit to alexandras
-
-//update app name
-
-//test across machines
+//BUILD FILE AGAIN
+//REMOVE INDEX LINK!
 
 //write build script-----------------------
 //auto-delete comments?--------------------
+
+//work on Windows bugs
 
 //declare elements at top of page
 
@@ -707,6 +742,8 @@ async function cheatSetup(){
 //onclose and such?
 
 //implement try/catch blocks also?
+
+//add names to chat
 
 //files/audio------------------------------
 
