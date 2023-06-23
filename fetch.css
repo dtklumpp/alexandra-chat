@@ -85,6 +85,8 @@ body::-webkit-scrollbar {
     overflow-wrap: break-word;
     /* color: #468847; */
     /* color: #3a87ad; */
+    white-space: pre-wrap;
+    /* white-space: pre-line; */
 }
 #message{
     width: 12rem;

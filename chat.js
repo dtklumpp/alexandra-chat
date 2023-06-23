@@ -71,17 +71,12 @@ $('#paste2').keypress((e)=>{if(e.which == 13) makeConnection();})
 //HEADS OFF NEWLINE INSERTION
 //modify this to allow newline input
 //or, to allow DIV to process it
-$('#message').keydown((e)=>{if(e.which == 13) {
+// $('#message').keydown((e)=>{if(e.which == 13) {
+$('#message').keydown((e)=>{if(e.which == 13 && !e.shiftKey) {
     e.preventDefault();
     sendMessage();
 }})
 
-//attempt to allow newlines
-//but need modify DIVs also
-// $('#message').keydown((e)=>{if(e.which == 13 && !e.shiftKey) {
-//     e.preventDefault();
-//     sendMessage();
-// }})
 
 
 
