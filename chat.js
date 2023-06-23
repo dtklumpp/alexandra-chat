@@ -682,7 +682,6 @@ async function cheatSetup(){
 
 //ok now what
 
-
 //add names to chat
 //add name prompt
 //limit to alexandras
@@ -692,7 +691,9 @@ async function cheatSetup(){
 //OH and load script & css into single html file------
 //for portability
 
-//add multi-line input
+//add multi-line input---------------------
+
+//write build script-----------------------
 
 //switch vanilla instead of JQ
 
