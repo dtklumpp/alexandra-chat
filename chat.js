@@ -44,16 +44,73 @@ const chatArea = $('#chat-area');
 //     if(e.which == 13) joinRoom();
 // })
 
+//modify these to keydown?
 $('#paste').keypress((e)=>{if(e.which == 13) joinRoom();})
 $('#paste2').keypress((e)=>{if(e.which == 13) makeConnection();})
 
 // $('#message').keypress((e)=>{if(e.which == 13) sendMessage();})
-$('#message').keyup((e)=>{if(e.which == 13) sendMessage();})
 
-$('#message').keypress((e)=>{if(e.which == 70) {
-    // e.preventDefault();
+//THIS ONE WORKS
+//TRIGGERS AFTER NEWLINE INSERTED
+// $('#message').keyup((e)=>{if(e.which == 13) sendMessage();})
+
+//this fails
+// $('#message').keypress((e)=>{if(e.which == 70) {
+//     // e.preventDefault();
+//     sendMessage();
+// }})
+
+//also fails
+// $('#message').keydown((e)=>{if(e.which == 13) {
+//     e.preventDefault();
+//     sendMessage();
+// }})
+
+//THIS WORKS TOO
+//BETTER I THINK
+//HEADS OFF NEWLINE INSERTION
+//modify this to allow newline input
+//or, to allow DIV to process it
+$('#message').keydown((e)=>{if(e.which == 13) {
+    e.preventDefault();
     sendMessage();
 }})
+
+//attempt to allow newlines
+//but need modify DIVs also
+// $('#message').keydown((e)=>{if(e.which == 13 && !e.shiftKey) {
+//     e.preventDefault();
+//     sendMessage();
+// }})
+
+
+
+
+
+
+
+//trying to stop F from typing F
+//OK, this experiment explained a lot of weird behavior
+
+// $('#message').keydown((e)=>{
+//     if(e.which == 70){
+//         // e.preventDefault();
+//         console.log("F'ed DOWN")
+//     }
+// })
+// $('#message').keypress((e)=>{
+//     if(e.which == 70){
+//         // e.preventDefault();
+//         console.log("F'ed PRESS")
+//     }
+// })
+// $('#message').keyup((e)=>{
+//     if(e.which == 70){
+//         // e.preventDefault();
+//         console.log("F'ed UP")
+//     }
+// })
+
 
 
 
