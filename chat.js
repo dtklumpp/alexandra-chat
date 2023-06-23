@@ -282,6 +282,7 @@ async function joinRoom(){
 
     if($('#paste').val() == "") {
         console.log('empty input');
+        $('#paste').css("color", "black");
         return;
     };
     // console.log("pasteval: ", $('#paste').val());
@@ -327,6 +328,9 @@ async function joinRoom(){
         await pc.setRemoteDescription(json);
     } catch(err) {
         console.log("invalid key: "+err);
+        $('#paste').css("color", "red");
+        // $('#paste-instruction').hide();
+        // $('#paste-instruction').fadeIn(400);
         return;
     }
 
@@ -363,6 +367,7 @@ async function makeConnection(){
 
     if($('#paste2').val() == "") {
         console.log('empty input');
+        $('#paste2').css("color", "black");
         return;
     };
 
@@ -376,6 +381,7 @@ async function makeConnection(){
         await pca.setRemoteDescription(json2);
     } catch(err){
         console.log("invalid handshake: "+err);
+        $('#paste2').css("color", "red");
         return;
     }
 
@@ -690,6 +696,8 @@ async function cheatSetup(){
 
 //write build script-----------------------
 //auto-delete comments?--------------------
+
+//declare elements at top of page
 
 //switch vanilla instead of JQ
 
