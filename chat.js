@@ -7,6 +7,14 @@ let pca;
 // let pcb;
 let dcg;
 
+const config = {
+    'iceServers': [
+        {
+            'urls': 'stun:stun.l.google.com:19302'
+        },
+    ]
+};
+
 //for same-page debugging
 $('#cheat').on('click', cheatSetup);
 $('#deactivate').on('click', disableButtons);
@@ -124,7 +132,10 @@ function createRoom(){
     createArea.fadeIn(400);
     // createArea.show();
     
-    let pc = new RTCPeerConnection();
+    let pc = new RTCPeerConnection(config);
+    // let pc = new RTCPeerConnection();
+
+
     // console.log(pc)
     let dc = pc.createDataChannel('taco');
     // console.log(dc)
@@ -320,7 +331,10 @@ async function joinRoom(){
     };
     // console.log("pasteval: ", $('#paste').val());
 
-    let pc = new RTCPeerConnection();
+    let pc = new RTCPeerConnection(config);
+    // let pc = new RTCPeerConnection();
+
+
     pca = pc;
 
     pc.ondatachannel = function(event){
@@ -399,6 +413,7 @@ async function joinRoom(){
 
         if(candidate.candidate == null){
 
+            //THIS FAILS OUT
             // let newanswer = await pc.createAnswer();
             // console.log('finished answer created');
             // console.log("answer origin: ", newanswer);
@@ -685,7 +700,10 @@ function announceSystem(str){
 
 async function cheatSetup(){
     console.log('cheat setup');
-    let pc1 = new RTCPeerConnection();
+    let pc1 = new RTCPeerConnection(config);
+    // let pc1 = new RTCPeerConnection();
+
+
     dc = pc1.createDataChannel('default');
     pca = pc1;
     dcg = dc;
@@ -756,47 +774,48 @@ async function cheatSetup(){
 //scroll to bottom when sent
 //transition for ergonomic key-turnaround
 //add chat connected system message
-    //add disconnection messages
+//  add disconnection messages
 //add better section transitions
 //error-checks
-    //for common errors
-    //empty boxes mostly
+//  for common errors
+//  empty boxes mostly
 //add exit and close button(s)
 //drop test messages
 //handle invalid keys (try/catch?)
 //add read receipts?
 //bigger typing box?
 //OH and load script & css into single html file------
-    //for portability
-    //allow multi-line input
+//  for portability
+//  allow multi-line input
 //add name prompt
-    //limit to alexandras
+//  limit to alexandras
 //update app name
 //test across machines
 //2nd full build
+//fix PC-mac 15-sec timeout error
+//  network activity?
+//  downloads folder?
+//  maybe 15-sec timeout / ICE cands?
 
 // ========================================================================================
 
 //ok now what
 
 //fix remote mac-mac errors
-//network activity?
-//downloads folder?
-//maybe 15-sec timeout / ICE cands?
+//fix open from gmail too!
 
-//BUILD FILE AGAIN
-//REMOVE INDEX LINKS!
-//CLEAN CSS BLOCKS
-//RESTORE HTML LINK
+//BUILD FILE AGAIN--x
+//REMOVE INDEX LINKS!--x
+//CLEAN CSS BLOCKS--x
+//RESTORE HTML LINK--x
 
 //write build script-----------------------
 //auto-delete comments?--------------------
 
 //let return key enter name
 
-//work on Windows bugs
-
 //declare elements at top of page
+//oh, like do all JQ "const" up there
 
 //switch vanilla instead of JQ
 
@@ -826,6 +845,11 @@ async function cheatSetup(){
 //let drag box around the page-------------
 
 //combine send-message functions-----------
+
+//try specifying the ICE servers?----------
+//i.e. use the google ones?
+//see if that ALSO fix pc-mac bug
+//without the previous fix
 
 //
 //
