@@ -39,6 +39,12 @@ textarea {
     text-align: left;
 } */
 
+
+/* textarea {
+    width: 20rem;
+    text-align: left;
+} */
+
 #chatbox {
     /* background-color: white; */
     background-color: var(--base-color);

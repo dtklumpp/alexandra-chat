@@ -372,6 +372,19 @@ async function joinRoom(){
     answerArea.fadeIn(400);
     // answerArea.show();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     // await pc.setRemoteDescription(globalOffer);
     console.log('remote description set', pc.remoteDescription);
 
@@ -381,16 +394,57 @@ async function joinRoom(){
     await pc.setLocalDescription(answer);
     console.log('local desc created', pc.localDescription);
 
-    // $('#answer-box').text(JSON.stringify(answer));
-    let answerKey = btoa(encodeURI(JSON.stringify(answer)))
-    answerKey = "===="+answerKey;
-    $('#answer-box').val(answerKey);
+    pc.onicecandidate = async function(candidate){
+        console.log('new ice candidate');
 
-    announceSystem("establishing...")
-    // $('#answer-box').text(answer.sdp);
-    // globalAnswer = answer;
+        if(candidate.candidate == null){
 
-    // pcb = pc;
+            // let newanswer = await pc.createAnswer();
+            // console.log('finished answer created');
+            // console.log("answer origin: ", newanswer);
+
+            // let answerKey = btoa(encodeURI(JSON.stringify(newanswer)))
+
+
+            let newdesc = await pc.currentLocalDescription;
+
+            let answerKey = btoa(encodeURI(JSON.stringify(newdesc)))
+            // let answerKey = btoa(encodeURI(JSON.stringify(answer)))
+            answerKey = "===="+answerKey;
+            $('#answer-box').val(answerKey);
+            announceSystem("establishing...")
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    // // await pc.setRemoteDescription(globalOffer);
+    // console.log('remote description set', pc.remoteDescription);
+
+    // let answer = await pc.createAnswer();
+    // console.log('answer created', answer);
+
+    // await pc.setLocalDescription(answer);
+    // console.log('local desc created', pc.localDescription);
+
+    // // $('#answer-box').text(JSON.stringify(answer));
+    // let answerKey = btoa(encodeURI(JSON.stringify(answer)))
+    // answerKey = "===="+answerKey;
+    // $('#answer-box').val(answerKey);
+
+    // announceSystem("establishing...")
+    // // $('#answer-box').text(answer.sdp);
+    // // globalAnswer = answer;
+
+    // // pcb = pc;
 
 }
 
@@ -719,10 +773,16 @@ async function cheatSetup(){
     //limit to alexandras
 //update app name
 //test across machines
+//2nd full build
 
 // ========================================================================================
 
 //ok now what
+
+//fix remote mac-mac errors
+//network activity?
+//downloads folder?
+//maybe 15-sec timeout / ICE cands?
 
 //BUILD FILE AGAIN
 //REMOVE INDEX LINKS!
