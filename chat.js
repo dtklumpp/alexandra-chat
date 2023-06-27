@@ -250,6 +250,7 @@ $('#copy-answer').on('click', function(){
 $('#sent').on('click', function(){
     createArea.hide();
     connectArea.fadeIn(400);
+    // $('#paste2').focus();
     // connectArea.show();
 })
 
@@ -287,12 +288,14 @@ function verifyIdentity(){
 $('#piggyback').on('click', () => {
     setupArea.hide();
     joinArea.fadeIn(400);
+    // $('#paste').focus();
     // joinArea.show();
 })
 
 $('#sent-back').on('click', () => {
     answerArea.hide();
     chatArea.show();
+    $('#message').focus();
 })
 
 function disableButtons(){
@@ -490,6 +493,7 @@ async function makeConnection(){
 
     connectArea.hide();
     chatArea.show();
+    $('#message').focus();
     announceSystem("establishing...")
 
     // await pca.setRemoteDescription(globalAnswer);
@@ -740,6 +744,7 @@ async function cheatSetup(){
         await pc1.setRemoteDescription(answer);
         setupArea.hide();
         chatArea.show();
+        $('#message').focus();
     }
 }
 
